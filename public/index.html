@@ -1,0 +1,47 @@
+<!DOCTYPE>
+<html ng-app="ritaApp">
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+    <title>RITA</title>
+</head>
+
+<body>
+    <div class="container" ng-controller="AppCtrl">
+        <h2>Customer Profiles</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cust ID</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>DOB</th>
+                    <th>Marital Status</th>
+                    <th>Dependents</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="custProfile in custProfiles">
+                    <td>{{custProfile['Cust ID']}}</td>
+                    <td>{{custProfile['Cust Name']}}</td>
+                    <td>{{custProfile.City}}</td>
+                    <td>{{custProfile['Date of Birth']}}</td>
+                    <td>{{custProfile['Marital Status']}}</td>
+                    <td>{{custProfile.Dependents}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+    <script src="controllers/controller.js"></script>
+</body>
+
+</html>
