@@ -1,7 +1,7 @@
 ---
 applications:
 - name: rita
-  command: node app.js
+  command: node server.js
   path: .
   memory: 1G
   services:
