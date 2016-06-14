@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 launchConfigurations/
 .git/
+=======
+node_modules
+>>>>>>> 9a6b035117556372775d360df9af19894e288fe2
