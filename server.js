@@ -57,5 +57,6 @@ app.put('/contactlist/:id', function (req, res) {
     });
 });
 
-app.listen(3000);
-console.log("Server running on port 3000");
+var port = process.env.VCAP_APP_PORT || 3000;
+app.listen(port);
+console.log('Server running at port :', port);
