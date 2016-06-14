@@ -1,0 +1,13 @@
+---
+applications:
+- name: rita
+  command: node app.js
+  path: .
+  memory: 1G
+  services:
+  - watsonpi
+  - watsondc
+  - watsonnlc
+  - watsonrnr
+  - watsonalchemy
+  - watsonbox
