@@ -6,6 +6,8 @@
     "dependencies": {
         "body-parser": "^1.10.2",
         "express": "^4.11.1",
-        "mongojs": "^0.18.1"
+        "mongojs": "^0.18.1",
+        "fs": "0.0.2",
+        "watson-developer-cloud": "^1.9.3"
     }
 }
