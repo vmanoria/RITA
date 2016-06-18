@@ -1,0 +1,13 @@
+{
+  "name": "RitaApp",
+  "version": "1.0.0",
+  "description": "MVP1.0",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
+    "mongojs": "^0.18.1",
+    "request": "^2.72.0",
+    "watson-developer-cloud": "^1.9.3"
+  }
+}

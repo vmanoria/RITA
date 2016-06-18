@@ -1,0 +1,8 @@
+Cust ID,Industry Segment,TCP (Total Costs Price),TCMP (Total Current Market Price),Original Allocation,Current Allocation
+400,IT Product,25000,28000,26.32%,15.38%
+400,IT Infrastructure,15000,17000,15.79%,9.34%
+400,IT Services,28000,34000,29.47%,18.68%
+400,Banking,17000,63000,17.89%,34.62%
+400,Investment Banking,10000,40000,10.53%,21.98%
+SUM,TCP (Total Costs Price),TCMP (Total Current Market Price),,,
+Totals,95000,182000,,,

@@ -1,0 +1,9 @@
+Cust ID,Security ID,Security Name,First Report Date (FRD),Average Cost Price (USD) for FRD,Quantity for FRD,TCP (Total Costs Price),Follow-up Report Date (FURD),Current Market Price (USD) for FURD,Quantity for FURD,TCMP (Total Current Market Price),P&L (Profit & Loss),P&L Percentage,Annualized Return,Original Allocation,Current Allocation
+400,MS,Microsoft,1/24/2015,25,1000,25000,12/20/2015,28,1000,28000,3000,12.00%,13.27%,26.32%,15.38%
+400,IBM,IBM,1/24/2015,15,1000,15000,12/20/2015,17,1000,17000,2000,13.33%,14.75%,15.79%,9.34%
+400,SIC,Semantic Inc,1/24/2015,28,1000,28000,12/20/2015,34,1000,34000,6000,21.43%,23.70%,29.47%,18.68%
+400,JPMC,JP Morgan,1/24/2015,5,1000,5000,12/20/2015,7,1500,10500,5500,110.00%,121.67%,5.26%,5.77%
+400,CITI,CITI,1/24/2015,12,1000,12000,12/20/2015,15,3500,52500,40500,337.50%,373.30%,12.63%,28.85%
+400,BNY,BNY Mellon,1/24/2015,10,1000,10000,12/20/2015,16,2500,40000,30000,300.00%,331.82%,10.53%,21.98%
+SUM,TCP (Total Costs Price),TCMP (Total Current Market Price),P&L (Profit & Loss),,,,,,,,,,,,
+Totals,95000,182000,87000,,,,,,,,,,,,
