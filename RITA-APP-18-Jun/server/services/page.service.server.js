@@ -10,7 +10,7 @@ module.exports = function (app, db) {
 
     function getCustomerPortfolio(req, res) {
 
-        var mycollection = db.collection('customer')
+        var mycollection = db.collection('CustomerStockData')
         mycollection.find(function (err, docs) {
             //console.log(docs);
             res.json(docs);
@@ -19,7 +19,7 @@ module.exports = function (app, db) {
     }
 
     function getCustomerPnLReport(req, res) {
-        var mycollection = db.collection('customer')
+        var mycollection = db.collection('CustomerStockData')
             mycollection.aggregate([
              {$match: { "CustomerID" : 100 }},  
              {$unwind:"$stocks"},
