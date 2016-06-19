@@ -1,0 +1,37 @@
+<h3>Input to PI</h3>
+
+<div>
+    <table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+        <thead>
+            <tr class="evenRow">
+                <td>
+                    <div class="dropdown clearfix">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{selectedCustomer}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="customer in customerList"><a ng-click="getCustomerInfo(customer.CustomerName)">{{customer.CustomerName}}</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr class="oddRow">
+                <td>
+
+                    <div class="form-group">
+                        <label for="comment">Text</label>
+                        <textarea class="form-control" rows="15" id="comment" ng-model="twits" value="Txt"></textarea>
+                    </div>
+                </td>
+            </tr>
+            <tr class="evenRow">
+                <td>
+                    <form method="post" ng-click="analyze(selectedCustomer)">
+                        <button type="submit" class="btn btn-success">Analyze...</button>
+                    </form>
+                </td>
+            </tr>
+        </thead>
+    </table>
+</div>

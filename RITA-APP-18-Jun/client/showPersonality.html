@@ -1,13 +1,13 @@
 <div class="container">
-    <h1>Personality Insights Sunburst Chart</h1>
-    <p class="lead">Use it to generate a sunburst chart visualization for your personality.</p>
+    <h2>Personality Insights Sunburst Chart</h2>
+
     <div class="row">
         <div class="col-sm-6 col-xs-12">
-            <h2>Personality Profile</h2>
+            <h3>Personality Profile</h3>
             <div id="profile" class=""></div>
         </div>
         <div class="col-sm-6 col-xs-12">
-            <h2>Personality Sunburst Chart</h2>
+            <h3>Personality Sunburst Chart</h3>
             <div id="sunburstChart"></div>
         </div>
     </div>
@@ -20,7 +20,6 @@
         $('#profile').append('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
 
         var chart = new PersonalitySunburstChart('sunburstChart');
-        console.log("In.......", chart);
         chart.show(profile, './data/photo.jpg');
     });
 </script>

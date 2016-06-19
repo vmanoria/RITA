@@ -8,7 +8,7 @@
 
         function displayInput() {
 
-            DisplayDataService.getCustomerPortfolio(function (response){
+            DisplayDataService.getCustomerPortfolio(function (response) {
                 $scope.custPortfolios = response;
             });
             /*

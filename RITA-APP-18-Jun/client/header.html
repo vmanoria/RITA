@@ -8,13 +8,22 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#/home">Home</a></li>
-                <li><a href="#/customerInputView">Verify Input</a></li>
-                <li><a href="#/customerOutputView">Verify Output</a></li>
-                <li><a href="#/personalityInsight">Personality Insight</a></li>
-                <li><a href="#/customerPnLReport">Customer P & L Report</a></li>
-                <li><a href="#/customerICRReport">Customer ICR  Report</a></li>
-            </ul>
+                <li><a href="#/about"><b>About</b></a></li>
+				<li><a href="#/customerInputView">Master</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/customerPnLReport">Customer P & L </a></li>
+						<li><a href="#/customerICRReport">Customer ICR  Report</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Services <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/inputPI">Personality Insight</a></li>
+                    </ul>
+                </li>
+			            </ul>
         </div>
     </div>
 </nav>

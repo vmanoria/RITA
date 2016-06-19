@@ -1,3 +1,4 @@
-module.exports = function (app, mongojs, db){
-    require("./services/page.service.server.js")(app, mongojs, db); 
- };
+module.exports = function (app, db, fs, watson) {
+    require("./services/page.service.server.js")(app, db);
+    require("./services/pi.server.service.js")(app, db, fs, watson);
+};

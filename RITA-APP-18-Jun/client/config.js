@@ -5,15 +5,20 @@
 
     function Configure($routeProvider) {
         $routeProvider
-            .when("/home", {
-                templateUrl: "home.html"
+            .when("/about", {
+                templateUrl: "about.html"
             })
             .when("/customerInputView", {
                 templateUrl: "customerInputView.html",
                 controller: "CustomerInputController"
             })
-            .when("/personalityInsight", {
-                templateUrl: "showPersonality.html"
+            .when("/personalityInsight/:custName", {
+                templateUrl: "showPersonality.html",
+		        controller: "ShowPersonalityInsightController"
+	     })
+	     .when("/inputPI",{
+                templateUrl: "inputPersonality.html",
+                controller: "PersonalityInsightController"
             })
             .when('/customerPnLReport',{
                templateUrl: '/customerpnlreport.html',
@@ -24,7 +29,7 @@
                controller: 'CustomerICRController'
             })
             .otherwise({
-                redirectTo: "/home"
+                redirectTo: "/about"
             });
     }
 })();
