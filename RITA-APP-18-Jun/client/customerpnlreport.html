@@ -1,11 +1,11 @@
 <div class="contentWrapper pageWidth">	
-            <h4 class="pageTitle">CUSTOMERâ€™S P&amp;L REPORT</h4>
+            <h4 class="pageTitle">CUSTOMER’S P&amp;L REPORT</h4>
 			<div class="tabMenuWrapper"> 				
 								 
 				 <div class="dropDownWrapper">
 					  <select class="dropDownControl" id="selectMe">
 						  <option value="100">VENKAT</option>
-						  <option value="200">ARUN</option>
+						  <option value="200">Pratap</option>
 						  <option value="300">LAKSHMI</option>
 						  <option value="400">GANESH</option>
 					  </select>					  
@@ -73,7 +73,7 @@
 												<td class="txtRight">{{custpnl['_id'].FURD_TCP}}</td>
 												<td class="txtRight">{{custpnl['_id'].PROFIT_LOSS}}</td>
 												<td class="txtRight">{{custpnl['_id'].PROFIT_LOSS/custpnl['_id'].FRD_TCP*100 | number:2}}</td>
-												<td class="txtRight">{{getDateDifference('FRD')}}</td>
+												<td class="txtRight">{{(custpnl['_id'].PROFIT_LOSS*365/getDateDifference())/custpnl['_id'].FURD_TCP*100 | number:2}}</td>
 											</tr>
 											<tr>											  
 											  <td colspan="2">TOTAL</td>
@@ -118,29 +118,19 @@
 								</div>	
 							</div>
 						</div>	
-						<div class="clearFix">
-							<div class="chartBox floatL width49 marginR2">
-							<div style="display:none" id="arun_originallabels">SUNP,ITC,HMN,YES</div>
-							<div style="display:none" id="arun_originalchartdata">8,4.18,7.20,79.86</div>
-								<h4>Original Allocation</h4>
-								<div class="padd5">
-									<!-- Place the Chart code here & remove the below image tag -->
-									<canvas id="arun_originalChart" />
-									<!--<img src="images/leftChartImage.jpg">-->
-								</div>
-							</div>
-							
-							<div class="chartBox floatL width49">
-							<div style="display:none" id="arun_currentlabels">SUNP,ITC,HMN,YES</div> <!-- Labels -->
-							<div style="display:none" id="arun_currentchartdata">8.66,3.78,4.68,82.88</div> <!-- Data's -->
-								<h4>Current Allocation</h4>
-								<div class="padd5">
-								    <!-- Place the Chart code here & remove the below image tag -->
-									<canvas id="arun_currentChart" />
-								</div>
-							</div>
-						</div>
-						
+						<!--div>
+							<nvd3-pie-chart
+						    	data="exampleData"
+						        id="exampleId"
+						        width="550"
+						        height="350"
+						        x="xFunction()"
+						        y="yFunction()"
+						        showLabels="true">
+						        <svg></svg>
+						    </nvd3-pie-chart>
+						</div>-->
+										
 					</div>
 				</div>
 			</div>

@@ -3,7 +3,8 @@ module.exports = function (app, db) {
     // app.get("/rest/customerProfile", getCustomerProfile);
     app.get("/rest/customerPortfolio", getCustomerPortfolio);
     app.get("/rest/customerPnLReport", getCustomerPnLReport);
-    //    app.get("/rest/securityIndustrySegments", getSecurityIndustrySegments);
+    app.get("/rest/customerICRReport", getCustomerICRReport);
+    //   app.get("/rest/securityIndustrySegments", getSecurityIndustrySegments);
     //  app.get("/rest/customerTransactionData", getCustomerTransactionData);
 
     
@@ -52,6 +53,29 @@ module.exports = function (app, db) {
             console.log(docs);
             res.json(docs);
         });
+    }
+    
+    function getCustomerICRReport(req, res) {
+    	var mycollection = db.collection('CustomerStockData')
+        mycollection.aggregate([
+                                {$match: { "CustomerID" : 100}}, 
+                          	   {$unwind:"$stocks"},
+                     		   {$group:
+                                	{_id:{
+                                	      custID:"$CustomerID",
+                                	      IndustrySegment:"$stocks.IndustrySegment"
+                                	      },
+                     	         TCP  : {$sum:{$multiply:[{ $arrayElemAt:["$stocks.Portfolio.Quantity_For_FRD",0]},{ $arrayElemAt:["$stocks.Portfolio.AverageCostPrice_FRD_INR",0]}]}},
+                     	         TCMP : {$sum:{$multiply:[{ $arrayElemAt:["$stocks.Portfolio.Quantity_For_FURD",0]},{ $arrayElemAt:["$stocks.Portfolio.CurrentMarketPrice_FURD_INR",0]}]}},
+                              	 count: { $sum: 1 }           	   
+                                	}
+                                }
+                            ],
+     		function (err,docs){
+             console.log(docs);
+             res.json(docs);
+         });
     } 
+
 
 }

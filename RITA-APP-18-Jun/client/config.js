@@ -19,6 +19,10 @@
                templateUrl: '/customerpnlreport.html',
                controller: 'CustomerPnLController'
             })
+            .when('/customerICRReport',{
+               templateUrl: '/customericreport.html',
+               controller: 'CustomerICRController'
+            })
             .otherwise({
                 redirectTo: "/home"
             });

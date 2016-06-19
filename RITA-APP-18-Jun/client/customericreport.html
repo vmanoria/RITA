@@ -1,0 +1,107 @@
+    <div class="contentWrapper pageWidth">	
+            <h4 class="pageTitle">CUSTOMER’S INDUSTRY CONCENTRATION REPORT</h4>			
+			<div class="tabMenuWrapper"> 				
+				 <div class="dropDownWrapper">
+					  <select class="dropDownControl" id="selectMe">
+						  <option value="100">VENKAT</option>
+						  <option value="200">Pratap</option>
+						  <option value="300">LAKSHMI</option>
+						  <option value="400">GANESH</option>
+					  </select>
+				 </div>
+				
+				 <div class="tabContentWrapper">
+					
+									
+					<div id="arun" class="tab_content">  						
+						
+						<div class="bottomMargin20 clearFix">
+							<div class="floatL width75 marginR1">
+								<div class="scrollTable hideHorizontalScroll">				
+									<table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+										<thead>
+											<tr class="gridHeaderBlue">
+												<th>Cust ID</th>
+												<th>Industry Segment</th>
+												<th>TCP (Total  Cost<br>Price INR)</th>
+												<th class="bgGreen">TCMP (Total Current<br>Market Price INR)</th>																																			
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr class="evenRow" ng-repeat="custicr in custICRReport">
+												<td>{{custicr['_id'].custID}}</td>
+												<td>{{custicr['_id'].IndustrySegment}}</td>
+												<td class="txtRight">{{custicr.TCP}}</td>
+												<td class="txtRight">{{custicr.TCMP}}</td>																							
+											</tr>
+										</tbody>
+										
+										<tfoot>
+											<tr>											  
+											  <td>TOTAL</td>
+											  <td>&nbsp;</td>
+											  <td class="txtRight">{{getTcpTotal('TCP')}}</td>
+											  <td class="txtRight">{{getTcmpTotal('TCMP')}}</td>											  
+											</tr>
+										</tfoot>
+										
+									</table>					
+								</div>	
+							</div>
+							
+							<div class="floatL width24">
+								<div class="scrollTable hideHorizontalScroll">				
+									<table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+
+										<thead>
+											<tr class="gridHeaderBlue">
+												<th>Original<br>Allocation</th>
+												<th class="bgGreen">Current<br>Allocation</th>																						
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr class="evenRow" ng-repeat="custicr in custICRReport">
+												<td class="txtRight">{{custicr.TCP/getTcpTotal('TCP')*100 | number:2}}</td>
+												<td class="txtRight">{{custicr.TCMP/getTcmpTotal('TCMP')*100 | number:2}}</td>												
+											</tr>
+										</tbody>
+										
+										<tfoot>
+											<tr>										 
+											  <td>&nbsp;</td>
+											  <td>&nbsp;</td>
+											</tr>
+										</tfoot>
+										
+									</table>					
+								</div>	
+							</div>
+						</div>	
+
+						<div class="clearFix">							
+							<div class="chartBox">
+								<h4>Industry Concentration Report</h4>
+								<div style="display:none" id="arun_Barlabels">Consumer,Financials,Healthcare</div>
+								<div style="display:none" id="arun_BarOriginalData">11.37,79.86,8.77</div>
+								<div style="display:none" id="arun_BarCurrentData">8.46,82.88,8.66</div>
+								<div class="padd5">
+								    <!-- Place the Chart code here & remove the below image tag -->
+									<canvas id='arun_barchar' height="80"/>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					
+					
+
+						
+				 </div>
+			
+			</div>
+			  			
+           <div class="clearFix"></div>
+                
+    </div>
