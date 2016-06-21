@@ -2,7 +2,7 @@ module.exports = function (app, db) {
 
     // app.get("/rest/customerProfile", getCustomerProfile);
     app.get("/rest/customerPortfolio", getCustomerPortfolio);
-    app.get("/rest/customerPnLReport", getCustomerPnLReport);
+    app.get("/rest/customerPnLReport/:custid", getCustomerPnLReport);
     app.get("/rest/customerICRReport", getCustomerICRReport);
     //   app.get("/rest/securityIndustrySegments", getSecurityIndustrySegments);
     //  app.get("/rest/customerTransactionData", getCustomerTransactionData);
@@ -20,9 +20,10 @@ module.exports = function (app, db) {
     }
 
     function getCustomerPnLReport(req, res) {
-        var mycollection = db.collection('CustomerStockData')
+    	var mycollection = db.collection('CustomerStockData')
+        var custID = req.params['customerID']; 
             mycollection.aggregate([
-             {$match: { "CustomerID" : 100 }},  
+             {$match: { "CustomerID" :100}},  
              {$unwind:"$stocks"},
                 {$group:
                 {_id:{

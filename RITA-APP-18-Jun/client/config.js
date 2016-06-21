@@ -15,7 +15,7 @@
             .when("/personalityInsight/:custName", {
                 templateUrl: "showPersonality.html",
 		        controller: "ShowPersonalityInsightController"
-	     })
+	       })
 	     .when("/inputPI",{
                 templateUrl: "inputPersonality.html",
                 controller: "PersonalityInsightController"

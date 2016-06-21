@@ -3,12 +3,21 @@
 			<div class="tabMenuWrapper"> 				
 								 
 				 <div class="dropDownWrapper">
-					  <select class="dropDownControl" id="selectMe">
+					  <!--select class="dropDownControl" id="selectMe">
 						  <option value="100">VENKAT</option>
 						  <option value="200">Pratap</option>
 						  <option value="300">LAKSHMI</option>
 						  <option value="400">GANESH</option>
-					  </select>					  
+					  </select>-->
+					  <div class="dropdown clearfix">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{selectedCustomer}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="customer in customers"><a ng-click="displayPnLReport(customer.CustomerID)">{{customer.CustomerName}}</a></li>
+                        </ul>
+                      </div>					  
 				 </div>
 				 <!--button id="update_chart">Update</button>-->
 				
@@ -117,11 +126,12 @@
 									</table>					
 								</div>	
 							</div>
-						</div>	
-						<!--div>
+						</div>
+
+						<div ng-controller="CustomerPnLController">
 							<nvd3-pie-chart
-						    	data="exampleData"
-						        id="exampleId"
+						    	data="prepareGraphParameter"
+						        id="originalAllocationId"
 						        width="550"
 						        height="350"
 						        x="xFunction()"
@@ -129,7 +139,7 @@
 						        showLabels="true">
 						        <svg></svg>
 						    </nvd3-pie-chart>
-						</div>-->
+						</div>
 										
 					</div>
 				</div>

@@ -6,13 +6,20 @@
     function DisplayPnLService($http) {
 
         var service = {
-              getPnLReport: getPnLReport
-                   
+              getPnLReport: getPnLReport,
+              getCustomers:getCustomers
+                       
         };
         return service;
 
-        function getPnLReport(callback) {
-            $http.get('/rest/customerPnLReport')
+        function getPnLReport(customerID,callback) {
+            console.log("CustomerID  in Client Service"+customerID)
+            $http.get('/rest/customerPnLReport/'+customerID)
+                .success(callback)
+        }
+        
+        function getCustomers(callback) {
+            $http.get('/rest/customers')
                 .success(callback)
         }
 
