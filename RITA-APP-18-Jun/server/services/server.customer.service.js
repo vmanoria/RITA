@@ -1,6 +1,6 @@
 module.exports = function (app, db) {
 
-    app.get("/rest/customers", getCustomerList);
+    app.get("/rest/customers", getCustomerList); 
     
     function getCustomerList(req, res) {
         var mycollection = db.collection('CustomerStockData')
