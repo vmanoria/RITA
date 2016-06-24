@@ -59,7 +59,7 @@
 
         }  
         
-        
+     
 
       $scope.getTotal = function(type){
       //type="FRD_TCP";

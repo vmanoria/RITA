@@ -14,12 +14,11 @@
 </div>
 
 <script>
-    console.log("In.......");
     $.getJSON('./data/profile.json', '', function (profile) {
 
         $('#profile').append('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
 
         var chart = new PersonalitySunburstChart('sunburstChart');
-        chart.show(profile, './data/photo.jpg');
+        chart.show(profile, './images/photo.jpg');
     });
 </script>

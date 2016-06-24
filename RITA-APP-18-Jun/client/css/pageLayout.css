@@ -1,12 +1,15 @@
-html,body {
+html,
+body {
 	margin:0;
 	padding:0;
+	padding-top: 20px;
 	height: 100%;
 }
 body {
 	background: #eeeeee;		
 	margin:0;
 	padding:0;
+	padding-top: 20px;
 	font-family: 'Arial', 'sans-serif';	
 	color: #333;	
 }

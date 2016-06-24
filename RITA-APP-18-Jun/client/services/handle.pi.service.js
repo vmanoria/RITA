@@ -19,7 +19,7 @@
         }
 
         function getCustomerTwit(customerName, callback) {
-            console.log(customerName);
+            //console.log(customerName);
             $http.get('/rest/customertwit/' + customerName)
                 .success(callback)
         }

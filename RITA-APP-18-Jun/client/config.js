@@ -13,8 +13,8 @@
                 controller: "CustomerInputController"
             })
             .when("/personalityInsight/:custName", {
-                templateUrl: "showPersonality.html",
-		        controller: "ShowPersonalityInsightController"
+                templateUrl: "showPersonality.html"
+	    
 	       })
 	     .when("/inputPI",{
                 templateUrl: "inputPersonality.html",

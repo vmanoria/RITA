@@ -14,7 +14,7 @@
             // console.log(customerName);
             $scope.twits = "";
             HandlePISevice.getCustomerTwit(customerName, function (response) {
-                console.log(response);
+                //console.log(response);
                 if (response == "") {
                     $scope.twits = "No Twit for " + customerName;
                     console.log($scope.twits);
