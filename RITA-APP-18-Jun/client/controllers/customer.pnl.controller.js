@@ -5,11 +5,10 @@
 
     function customerPnLController($scope, DisplayPnLService) {
         $scope.displayPnLReport = displayPnLReport ;
-        $scope.getCustomers = getCustomers;
-        
-        
+        $scope.getCustomers = getCustomers ;
+            
 
-        /*  function displayPnLReport() {
+        /* function displayPnLReport() {
             console.log("getCustomers");
 
           DisplayPnLService.getPnLReport(function (response) {
@@ -24,7 +23,7 @@
             });
          }   
             
-        }*/
+        }*/ 
 
         function getCustomers() {
               DisplayPnLService.getCustomers(function (response) { 
@@ -44,14 +43,16 @@
               );
           } 
 
-        getCustomers() ;
+        getCustomers();
         
      
-        function displayPnLReport(customerID) {
+        function displayPnLReport(customerID,customerName) {
              console.log("Inside displayPnLReport");
              DisplayPnLService.getPnLReport(customerID,function (response) {
                 $scope.custPnLReport = response ;
                 $scope.prepareGraphParameter();
+                $scope.prepareCurrentGraphParameter();
+                $scope.selectedCustomer =customerName;
 
             });
           
@@ -83,10 +84,8 @@
 
     $scope.prepareGraphParameter=function() { 
           console.log("Inside prepareGraphParameter"); 
-          var    graphArray   =[]; 
-          $scope.graphArray1   =[];   
-          var i=0;
-
+          $scope.graphArray   =[]; 
+             
           if(angular.isDefined($scope.custPnLReport)){  
             angular.forEach($scope.custPnLReport,function(el) {
                 var  object ={};
@@ -95,48 +94,29 @@
                // graphArray1=({key:el._id['SecurityName'],y:allocationpercentage }); 
                object.key  =el._id['SecurityName'];
                object.y  =Math.round((el._id['FRD_TCP']/total)*100);
-               $scope.graphArray1.push(object);
-               
-               i++;
-              //  graphArray = [
-              //    { key: "One", y: 5 }];
-            
-          });
+               $scope.graphArray.push(object);
+            });
         } 
-
-        /*for (var key in graphArray1) {
-            if (graphArray1.hasOwnProperty(key)) {
-                var val = graphArray1[key];
-              graphArray = [
-                { key: "One", y: 5 },{ key: "Two", y: 5 }];
-              console.log(val);
-            }
-         } */  
-         //graphArray1=[{"key":"SUN PHARMA","y":27},{"key":"SBI","y":3},{"key":"EMAMI","y":26},{"key":"ITC","y":15},{"key":"YES BANK","y":29}];
-         // console.log("--------------------------------------------------------"+JSON.stringify(graphArray1));
-         //graphArray = [
-          //       { key: "One", y: 5 },{ key: "Two", y: 5 }];
-          //console.log(graphArray); 
-          //console.log(graphArray1); 
           
-          return $scope.graphArray1;
           
     }
 
     $scope.prepareCurrentGraphParameter=function() { 
           console.log("Inside prepareCurrentGraphParameter"); 
-          var    graphCurrentArray =[]; 
+          $scope.graphCurrentArray =[]; 
+          
           if(angular.isDefined($scope.custPnLReport)){  
           angular.forEach($scope.custPnLReport,function(el) {
                 var  object ={};
-                var total= $scope.getTotal('FRUD_TCP');  
-                var allocationpercentage = (el._id['FRUD_TCP']/total)*100;
-                graphArray.push({"key":el._id['SecurityName'],"y":allocationpercentage }); 
-            
+                var total= $scope.getTotal('FURD_TCP');  
+                var allocationpercentage = (el._id['FURD_TCP']/total)*100;
+                object.key  =el._id['SecurityName'];
+                object.y  =Math.round((el._id['FURD_TCP']/total)*100);
+                $scope.graphCurrentArray.push(object); 
           });
          } 
-          console.log(graphCurrentArray); 
-          return graphCurrentArray ;
+          console.log($scope.graphCurrentArray); 
+          
     }
 
      $scope.getDateDifference = function(){

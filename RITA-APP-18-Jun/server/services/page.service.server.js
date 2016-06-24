@@ -1,9 +1,9 @@
-module.exports = function (app, db) {
+module.exports = function (app, db){
 
     // app.get("/rest/customerProfile", getCustomerProfile);
     app.get("/rest/customerPortfolio", getCustomerPortfolio);
     app.get("/rest/customerPnLReport/:custid", getCustomerPnLReport);
-    app.get("/rest/customerICRReport", getCustomerICRReport);
+    app.get("/rest/customerICRReport/:custid", getCustomerICRReport);
     //   app.get("/rest/securityIndustrySegments", getSecurityIndustrySegments);
     //  app.get("/rest/customerTransactionData", getCustomerTransactionData);
 
@@ -21,9 +21,10 @@ module.exports = function (app, db) {
 
     function getCustomerPnLReport(req, res) {
     	var mycollection = db.collection('CustomerStockData')
-        var custID = req.params['customerID']; 
+        var custID = parseInt(req.params['custid']); 
+        console.log("CustomerID ::"+custID);
             mycollection.aggregate([
-             {$match: { "CustomerID" :100}},  
+             {$match: { "CustomerID" :custID}},  
              {$unwind:"$stocks"},
                 {$group:
                 {_id:{
@@ -58,8 +59,10 @@ module.exports = function (app, db) {
     
     function getCustomerICRReport(req, res) {
     	var mycollection = db.collection('CustomerStockData')
+    	var custID = parseInt(req.params['custid']);
+    	console.log("CustomerID:"+custID);
         mycollection.aggregate([
-                                {$match: { "CustomerID" : 100}}, 
+                                {$match: { "CustomerID" : custID}}, 
                           	   {$unwind:"$stocks"},
                      		   {$group:
                                 	{_id:{

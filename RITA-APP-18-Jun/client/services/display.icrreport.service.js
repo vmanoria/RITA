@@ -6,14 +6,20 @@
     function DisplayICRService($http) {
 
         var service = {
-              getICRReport: getICRReport
+              getICRReport: getICRReport,
+              getCustomers:getCustomers
                    
         }; 
         
         return service;
 
-        function getICRReport(callback) {
-            $http.get('/rest/customerICRReport')
+        function getICRReport(customerID,callback) {
+            $http.get('/rest/customerICRReport/'+customerID)
+                .success(callback)
+        }
+        
+        function getCustomers(callback) {
+            $http.get('/rest/customers')
                 .success(callback)
         }
         

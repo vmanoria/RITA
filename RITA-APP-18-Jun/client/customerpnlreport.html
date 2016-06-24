@@ -15,7 +15,7 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li ng-repeat="customer in customers"><a ng-click="displayPnLReport(customer.CustomerID)">{{customer.CustomerName}}</a></li>
+                            <li ng-repeat="customer in customers"><a ng-click="displayPnLReport(customer.CustomerID,customer.CustomerName)">{{customer.CustomerName}}</a></li>
                         </ul>
                       </div>					  
 				 </div>
@@ -128,9 +128,9 @@
 							</div>
 						</div>
 
-						<div ng-controller="CustomerPnLController">
+						<!--div ng-controller="CustomerPnLController">
 							<nvd3-pie-chart
-						    	data="prepareGraphParameter"
+						    	data="graphArray"
 						        id="originalAllocationId"
 						        width="550"
 						        height="350"
@@ -139,6 +139,46 @@
 						        showLabels="true">
 						        <svg></svg>
 						    </nvd3-pie-chart>
+						</div>-->
+
+						<div class="clearFix">
+							<div class="chartBox floatL width49 marginR2">
+								<h4>Original Allocation</h4>
+								<div class="padd5" ng-controller="CustomerPnLController">
+										<nvd3-pie-chart
+										    	data="graphArray"
+										        id="originalAllocationId"
+										        width="550"
+										        height="350"
+										        x="xFunction()"
+										        y="yFunction()"
+										        showLabels="true"
+										        labelType="percent"
+										        showLegend="true">
+										        <svg height="250"></svg>
+						    			</nvd3-pie-chart>
+									
+								</div>
+							</div>
+							
+							<div class="chartBox floatL width49">
+								<h4>Current Allocation</h4>
+								<div class="padd5" ng-controller="CustomerPnLController">
+										<nvd3-pie-chart
+										    	data="graphCurrentArray"
+										        id="currentAllocationId"
+										        width="550"
+										        height="350"
+										        x="xFunction()"
+										        y="yFunction()"
+										        showLabels="true"
+										        labelType="percent"
+										        showLegend="true">
+										        <svg height="250"></svg>
+						    			</nvd3-pie-chart>
+									
+								</div>
+							</div>
 						</div>
 										
 					</div>

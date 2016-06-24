@@ -1,14 +1,24 @@
     <div class="contentWrapper pageWidth">	
             <h4 class="pageTitle">CUSTOMER’S INDUSTRY CONCENTRATION REPORT</h4>			
 			<div class="tabMenuWrapper"> 				
-				 <div class="dropDownWrapper">
+				 <!--div class="dropDownWrapper">
 					  <select class="dropDownControl" id="selectMe">
 						  <option value="100">VENKAT</option>
 						  <option value="200">Pratap</option>
 						  <option value="300">LAKSHMI</option>
 						  <option value="400">GANESH</option>
 					  </select>
-				 </div>
+				 </div>-->
+				 
+				 	<div class="dropdown clearfix">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{selectedCustomer}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="customer in customers"><a ng-click="displayICRReport(customer.CustomerID,customer.CustomerName)">{{customer.CustomerName}}</a></li>
+                        </ul>
+                      </div>
 				
 				 <div class="tabContentWrapper">
 					
@@ -83,13 +93,27 @@
 						<div class="clearFix">							
 							<div class="chartBox">
 								<h4>Industry Concentration Report</h4>
-								<div style="display:none" id="arun_Barlabels">Consumer,Financials,Healthcare</div>
+								<!--div style="display:none" id="arun_Barlabels">Consumer,Financials,Healthcare</div>
 								<div style="display:none" id="arun_BarOriginalData">11.37,79.86,8.77</div>
 								<div style="display:none" id="arun_BarCurrentData">8.46,82.88,8.66</div>
 								<div class="padd5">
 								    <!-- Place the Chart code here & remove the below image tag -->
-									<canvas id='arun_barchar' height="80"/>
-								</div>
+									<!--canvas id='arun_barchar' height="80"/>-->
+								<!--/div>-->
+
+											<div ng-controller="CustomerICRController">
+												<nvd3-multi-bar-chart
+											    	data="graphArray"
+											        id="exampleId"
+											        xAxisTickFormat="xAxisTickFormatFunction()"
+											        width="550"
+											        height="350"
+											        showXAxis="true"
+											        showYAxis="true">
+											        <svg></svg>
+											    </nvd3-multi-bar-chart>
+											</div>
+
 							</div>
 						</div>
 						
