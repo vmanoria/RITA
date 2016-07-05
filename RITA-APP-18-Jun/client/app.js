@@ -1,4 +1,4 @@
 (function () {
-    angular 
-        .module("RitaApp", ["ngRoute", 'ui.filters','nvd3ChartDirectives']); 
+    angular
+        .module("RitaApp", ["ngRoute", 'ui.filters', 'nvd3ChartDirectives', 'ngSanitize']);
 })();

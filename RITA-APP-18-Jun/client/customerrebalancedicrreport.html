@@ -1,0 +1,95 @@
+    <div class="contentWrapper pageWidth">	
+            <h4 class="pageTitle">CUSTOMER’S REBALANCED INDUSTRY CONCENTRATION REPORT</h4>			
+			<div class="tabMenuWrapper"> 				
+				 
+				 	<div class="dropdown clearfix">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{selectedCustomer}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="customer in customers"><a ng-click="displayRebalICRReport(customer.CustomerID,customer.CustomerName)">{{customer.CustomerName}}</a></li>
+                        </ul>
+                      </div>
+				
+				 <div class="tabContentWrapper">
+					
+									
+					<div id="arun" class="tab_content">  						
+						
+						<div class="bottomMargin20 clearFix">
+							<div class="floatL width75 marginR1">
+								<div class="scrollTable hideHorizontalScroll">				
+									<table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+										<thead>
+											<tr class="gridHeaderBlue">
+												<th>Industry Segment</th>
+												<th>Original <br>Allocation(INR)</th>
+												<th>Current <br>Allocation(INR)</th>
+												<th>Rebalanced Current <br>Allocation(INR)</th>
+												<th>Incremental<br>Investments</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr class="evenRow" ng-repeat="custrebicr in custRebalICRReport">
+												<td>{{custrebicr['_id'].IndustrySegment}}</td>
+												<td class="txtRight">{{custrebicr.TCP}}</td>
+												<td class="txtRight">{{custrebicr.TCMP}}</td>	
+												<td class="txtRight">{{custrebicr.rebalancedAlloc}}</td>
+												<td class="txtRight">{{custrebicr.incrementalInvest | number:0}}</td>												
+											</tr>
+										</tbody>
+										
+										<tfoot>
+											<tr>											  
+											  <td>TOTAL</td>
+											   <td class="txtRight">{{getRebalTcpTotal()}}</td>
+											  <td class="txtRight">{{getRebalTcmpTotal()}}</td>	
+												 <td class="txtRight">{{getRebalAllocationTotal()}}</td>	
+												 <td class="txtRight"></td>	 
+											</tr>
+										</tfoot>
+										
+									</table>					
+								</div>	
+							</div>
+							
+							
+						</div>	
+
+			  			
+						<div class="clearFix">						
+							<div class="chartBox">
+								<h4>{{selectedCustomer}}'s Rebalnced ICR</h4>
+								<h3>ICR(Industry Concentration Report)</h3>
+								
+											<div ng-controller="CustomerICRController">
+												<nvd3-multi-bar-chart
+													data="rebalancedDataForChart"
+													id="exampleId2"
+													width="550"
+													height="350"
+													x="xMultiBarFunction()"
+													y="yMultiBarFunction()"
+													showXAxis="true"
+													showYAxis="true"
+													showLegend="true"
+													 color="colorFunction()"
+													 forcey="[99000]">
+														<svg></svg>
+												</nvd3-multi-bar-chart>
+											</div>
+
+							</div>
+						
+						</div>
+                
+					</div>
+				</div>
+				
+	</div>
+			  			
+           <div class="clearFix"></div>
+                
+    </div>

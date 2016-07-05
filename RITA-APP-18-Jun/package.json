@@ -6,7 +6,9 @@
   "dependencies": {
     "body-parser": "^1.10.2",
     "express": "^4.11.1",
+    "i18n": "^0.8.2",
     "mongojs": "^0.18.1",
+    "regex": "^0.1.1",
     "request": "^2.72.0",
     "watson-developer-cloud": "^1.9.3"
   }

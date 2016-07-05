@@ -1,7 +1,5 @@
-<h3>Input to PI</h3>
-
-<div>
-    <table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+<div class="table-container">
+    <table>
         <thead>
             <tr class="evenRow">
                 <td>
@@ -11,27 +9,58 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li ng-repeat="customer in customerList"><a ng-click="getCustomerInfo(customer.CustomerName)">{{customer.CustomerName}}</a></li>
+                            <li ng-repeat="customer in customerList"><a ng-click="analyze(customer)">{{customer.CustomerName}}</a></li>
                         </ul>
-                    </div>
+                        <b> &nbsp; &nbsp; &nbsp; &nbsp; </b> &nbsp; &nbsp; &nbsp; &nbsp; <b>Select the Customer from the List to view Personality Portrait </b>
                 </td>
-            </tr>
-            <tr class="oddRow">
-                <td>
-
-                    <div class="form-group">
-                        <label for="comment">Text</label>
-                        <textarea class="form-control" rows="15" id="comment" ng-model="twits" value="Txt"></textarea>
-                    </div>
-                </td>
-            </tr>
-            <tr class="evenRow">
-                <td>
-                    <form method="post" ng-click="analyze(selectedCustomer)">
-                        <button type="submit" class="btn btn-success">Analyze...</button>
-                    </form>
-                </td>
+                <td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</td>
+                <td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</td>
+                <td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</td>
+                <td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</td>
+                <td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <strong> {{message}} </strong></td>
             </tr>
         </thead>
     </table>
-</div>
+    </div>
+
+    <div ng-if="progress == 'Done'">
+        <div class="wrapper">
+            <div class="profilr-info">
+                <h2>Profile Information</h2>
+                <div><img ng-src="images/{{PhotoFile}}" width="102" height="104" align="left">
+                    <p><strong>{{selectedCustomer}}</strong></p>
+                    <p>DOB: {{DateOfBirth}}</p>
+                    <p>Location: {{City}} </p>
+                    <p>Status: {{MaritalStatus}}</p>
+                    <p>Customer ID: {{CustomerID}}</p>
+                </div>
+            </div>
+            <div class="summary">
+                <h2>Summary</h2>
+            </div>
+            <div class="summary" ng-bind-html="summary">
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="personality">
+                <hr>
+                <h2>Personality Sunburst Chart</h2>
+                <div class="col-sm-6 col-xs-12">
+                    <div id="sunburstChart"></div>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="PersonalityInsightController">
+            <script>
+                var PhotoFile = $('[ng-controller="PersonalityInsightController"]').scope().PhotoFile;
+
+                $.getJSON('./data/profile.json', '', function (profile) {
+
+                    $('#profile').append('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+
+                    var chart = new PersonalitySunburstChart('sunburstChart');
+                    chart.show(profile, './images/' + PhotoFile);
+                });
+            </script>
+        </div>
+    </div>

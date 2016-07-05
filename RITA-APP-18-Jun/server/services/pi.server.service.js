@@ -8,7 +8,14 @@ module.exports = function (app, db, fs, watson) {
     function getCustomerList(req, res) {
         var mycollection = db.collection('CustomerStockData')
         mycollection.find({}, {
-                "CustomerName": 1
+                "_id": 1,
+                "CustomerID": 1,
+                "CustomerName": 1,
+                "City": 1,
+                "DateOfBirth": 1,
+                "MaritalStatus": 1,
+                "PhotoFile": 1,
+                "RiskType": 1
             },
             function (err, docs) {
                 res.json(docs);
@@ -25,16 +32,6 @@ module.exports = function (app, db, fs, watson) {
             }
             res.json(data);
         });
-        /*
-         mycollection.find({
-                 custName: custName
-             }, {
-                 "twit": 1
-             },
-             function (err, docs) {
-                 res.json(docs);
-             });
-             */
     }
 
     function analyzeTwit(req, res) {
@@ -89,6 +86,7 @@ module.exports = function (app, db, fs, watson) {
                             return console.log(err);
                         }
                         var personalityProfile = JSON.parse(data);
+
                         var mycollection = db.collection('PersonalityProfile')
                         mycollection.insert({
                                 custName: custName,
@@ -97,14 +95,11 @@ module.exports = function (app, db, fs, watson) {
                             function (err, testData) {
                                 if (err || !testData) console.log("Unable to add user");
                             }
+                            //return personalityProfile ;
                     });
-
+                    // PI MVP 2
+                    res.json(response);
                 }).pipe(fs.createWriteStream('./client/data/profile.json'));
-
-
         });
-
-
-
     }
 }

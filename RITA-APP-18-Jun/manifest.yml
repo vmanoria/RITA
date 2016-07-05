@@ -6,4 +6,6 @@ applications:
   memory: 1G
   services:
   - watsonpi
+  - rirarrapi
+  - watsonalchemy
   

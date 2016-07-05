@@ -27,3 +27,7 @@ mongoimport --collection SaikiranICR --db RITA-DB --type csv --headerline --file
 
 
 mongoimport --host 169.44.118.232 --collection CustomerStockData --db RITA-DB --file rita-update-db.json
+
+// For Local DB
+
+mongoimport  --collection CustomerStockData --db RITA-DB --file rita-update-db.json

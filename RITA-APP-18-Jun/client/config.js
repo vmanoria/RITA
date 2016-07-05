@@ -12,11 +12,7 @@
                 templateUrl: "customerInputView.html",
                 controller: "CustomerInputController"
             })
-            .when("/personalityInsight/:custName", {
-                templateUrl: "showPersonality.html"
-	    
-	       })
-	     .when("/inputPI",{
+              .when("/inputPI",{
                 templateUrl: "inputPersonality.html",
                 controller: "PersonalityInsightController"
             })
@@ -28,6 +24,15 @@
                templateUrl: '/customericreport.html',
                controller: 'CustomerICRController'
             })
+             .when('/customerRebalancedICRReport',{
+               templateUrl: '/customerrebalancedicrreport.html',
+               controller: 'CustomerRebalancedICRController'
+            })
+             .when('/recommendedPortfolio',{
+               templateUrl: '/recommendedPortfolio.html',
+               controller: 'CustomerRebalancedICRController'
+            })
+
             .otherwise({
                 redirectTo: "/about"
             });

@@ -1,0 +1,140 @@
+<div class="contentWrapper pageWidth">	
+	
+	<h4 class="pageTitle">RECOMMENDED PORTFOLIO</h4>			
+	<div class="tabMenuWrapper">
+			<div class="dropdown clearfix">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{selectedCustomer}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="customer in customers"><a ng-click="displayRecommendedReports(customer.CustomerID,customer.CustomerName)">{{customer.CustomerName}}</a></li>
+                        </ul>
+                      </div>			
+		 <div class="tabContentWrapper">
+			
+			<div id="arun" class="tab_content"> 
+										
+				<div class="bottomMargin20 clearFix">
+					<div class="floatL width65 marginR1">
+						
+						<h5 class="contentTitle">Recommendations based on ICR <span class="txtNormal">(Industry Concentration Report)</span></h5>
+						<div class="scrollTable230 hideHorizontalScroll bottomMargin20">				
+							<table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+
+								<thead>
+									<tr class="gridHeaderBlue">
+									  <th rowspan="2">Security  ID</th>
+									  <th rowspan="2">Security Name</th>
+									  <th colspan="3" align="center">ICR</th>
+								  </tr>
+									<tr class="gridHeaderBlue">
+										<th>Current <br>Market Price</th>
+										<th>Recommendation</th>
+										<th>Suggested <br>Reinvestment Amount</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr class="evenRow" ng-repeat="recomICR in recommendedICR"> 
+										<td>{{recomICR.securityID}}</td>
+										<td>{{recomICR.securityName}}</td>
+										<td class="txtRight">{{recomICR.currentMarketPrice}}</td>
+										<td class="txtCenter">{{recomICR.recommendation}}</td>
+										<td class="txtRight">{{recomICR.incrementalInvest}}</td>			
+									</tr>
+																	
+								</tbody>
+																												
+							</table>					
+						</div>	
+						
+						<h5 class="contentTitle">Recommendations based on IAR <span class="txtNormal">(Internal Analyst Report)</span></h5>
+						<div class="scrollTable230 hideHorizontalScroll bottomMargin20">				
+							<table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+
+								<thead>
+									<tr class="gridHeaderBlue">
+									  <th rowspan="2">Security  ID</th>
+									  <th rowspan="2">Security Name</th>
+									  <th colspan="2">IAR</th>
+								  </tr>
+									<tr class="gridHeaderBlue">
+										<th>Target <br>Price</th>
+										<th>Recommendation</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr class="evenRow" ng-repeat="recomIAR in recommendedIAR">
+										<td>{{recomIAR.securityID}}</td>
+										<td>{{recomIAR.securityName}}</td>
+										<td class="txtRight">{{recomIAR.targetprice}}</td>
+										<td class="txtCenter">{{recomIAR.recommend}}</td>
+									</tr>
+															
+								</tbody>
+																												
+							</table>					
+						</div>	
+						
+						<h5 class="contentTitle">Recommendations based on EAR <span class="txtNormal">(External Analyst Report)</span></h5>
+						<div class="scrollTable230 hideHorizontalScroll">				
+							<table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+
+								<thead>
+									<tr class="gridHeaderBlue">
+									  <th rowspan="2">Security  ID</th>
+									  <th rowspan="2">Security Name</th>
+									  <th colspan="2">EAR</th>
+								  </tr>
+									<tr class="gridHeaderBlue">
+										<th>Target <br>Price</th>
+										<th>Recommendation</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr class="evenRow" ng-repeat="recomEAR in recommendedEAR">
+										<td>{{recomEAR.securityID}}</td>
+										<td>{{recomEAR.securityName}}</td>
+										<td class="txtRight">{{recomEAR.targetprice}}</td>
+										<td class="txtCenter">{{recomEAR.recommend}}</td>
+									</tr>
+														
+								</tbody>
+																												
+							</table>					
+						</div>	
+						
+				  </div>	
+					
+				  <div class="floatL width34">
+
+                            <div class="boxBorderGrey rightSecHyperLinkTxt">
+                                <table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+
+                                    <thead>
+                                        <tr class="gridHeaderBlue">
+                                            <th colspan="3">Top 20 Stocks News</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <div class="scrollTable300 hideHorizontalScroll padd10" ng-repeat="url in urls">
+                                    <a target="_blank" ng-href="{{url.source.enriched.url['url']}}">{{url.source.enriched.url['title']}}</a>
+                                </div>
+
+                            </div>
+                   </div>
+																		
+				</div>	
+									
+			</div>					
+								
+		 </div>
+	
+	</div>
+				
+   <div class="clearFix"></div>
+		
+</div>	
