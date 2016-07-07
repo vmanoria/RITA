@@ -82,7 +82,7 @@
 												<td class="txtRight">{{custpnl['_id'].FURD_TCP}}</td>
 												<td class="txtRight">{{custpnl['_id'].PROFIT_LOSS}}</td>
 												<td class="txtRight">{{custpnl['_id'].PROFIT_LOSS/custpnl['_id'].FRD_TCP*100 | number:2}}</td>
-												<td class="txtRight">{{(custpnl['_id'].PROFIT_LOSS*365/getDateDifference())/custpnl['_id'].FURD_TCP*100 | number:2}}</td>
+												<td class="txtRight">{{((custpnl['_id'].PROFIT_LOSS*(365/getDateDifference()))/custpnl['_id'].FRD_TCP)*100 | number:2}}</td>
 											</tr>
 											<tr>											  
 											  <td colspan="2">TOTAL</td>

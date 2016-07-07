@@ -10,8 +10,8 @@
         };
         return service;
 
-        function getAlchemyNewsURLs(callback) {
-            $http.get('/rest/alchemynewsurls')
+        function getAlchemyNewsURLs(securityNames, callback) {
+            $http.get('/rest/alchemynewsurls/' + securityNames)
                 .success(callback)
         }
     }

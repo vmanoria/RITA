@@ -122,83 +122,75 @@ module.exports = function (app, db,watson,Regex){
      	}; 
         
         solrClient = retrieve_and_rank.createSolrClient(params);
-        console.log('Searching all documents.');
-        var counter=1;
-        var outputArray=[] ;
-        listOfSecurities.forEach(function(item){
-            console.log (item);
-            var  security ;
-            var  recommend ; 
-            if(securityMap[item]!==undefined){
-              security =securityMap[item];
-            } else { 
-              security =item;
-            }
-         
-            recommendMap.forEach(function(key){
-            input =security+' '+key ;
-            
-            searchDocument(res,solrClient,input,listOfSecurities,counter,outputArray,item);
-            counter++ ;
-              }); 
-            
-        });
-     
-}
+        searchDocument(res,solrClient,listOfSecurities);
+     }
    
-     function searchDocument(res,solrClient,input,listOfSecurities,counter,outputArray,security){
-    	     var  finalInput ; 
-    	     console.log("Input for Solar Search"+input);
-    	    //var  inputvar  = 'EMAMI* Buy'; 
-    	    var  inputvar  	 = input ; 
-    	    console.log('Searching all documents.');  
-    	    var query = solrClient.createQuery();
-    	    query.q({'content' : '\"'+inputvar+'\"' }); 
-    	    solrClient.search(query, function(err, searchResponse){
-    	      if(err) {
-    	          console.log('Error searching for documents: ' + err);
-    	      }
-    	        else {
-    	          console.log('Found ' + searchResponse.response.numFound + ' documents.');
-    	          var obj ={} ;
-    	          var splittedString;
-    	                 if(searchResponse.response.numFound>0){
-    	                     finalInput =(searchResponse.response.docs[0].content+'').replace(/\*/g ,'');
-    	                     var reObj = '('+inputvar+')'+'(\\s+)(\\d+)' ;
-    	                     console.log('REgEx Object for  IAR Report'+reObj);
-    	                     var  re  =   new RegExp(reObj,"i");  
-    	                     if ((m = re.exec(finalInput)) !== null){
-    	                         console.log(m[0]);
-    	                         console.log(m[1]);
-    	                         console.log(m[2]);
-    	                         console.log(m[3]);
-    	                         console.log(m.length);
-    	                         if (m.index === re.lastIndex) {
-    	                             re.lastIndex++ ;
-    	                         }
-    	                        splittedString =m[0].split(' ');
-    	                        obj.securityName  =security ; //splittedString[0];
-    	                        obj.recommend 	  =splittedString[1];
-    	                        obj.targetprice   =splittedString[2];
-    	                        outputArray.push(obj);
-    	                        
-    	                      }
-    	                     
-    	               } else {
-    	            	   		console.log("No Document Found");	
-    	               }
-    	               console.log(outputArray);
-    	               console.log("Counter:"+counter);
-    	               console.log("Securities Length:"+(listOfSecurities.length)*3);
-    	               //if(counter==(listOfSecurities.length && outputArray.length==2){
-    	               if(counter==((listOfSecurities.length)*3)){
-    	            	  res.json(outputArray);
-    	               }
-    	         	                   	             	          
-    	          } 
-    	    });  
-    	    
-       	}
+     function searchDocument(res,solrClient,listOfSecurities){
+    	 var securityMap      = {'EMAMI':'EMAMI*'};
+ 	     var recommendMap     = ['Sell','Neutral','Buy'];
+ 	     var outputArray=[] ;
+	    console.log('Searching all documents for IAR.');  
+	    var query = solrClient.createQuery();
+	    query.q({'*' : '*' }); 
+	    solrClient.search(query, function(err, searchResponse){
+	      if(err) {
+	          console.log('Error searching for documents: ' + err);
+	      }
+	        else {
+	          console.log('Found ' + searchResponse.response.numFound + ' documents.');
+	          var splittedString;
+	                 if(searchResponse.response.numFound>0){
+	                     finalInput =(searchResponse.response.docs[0].content+'').replace(/\*/g ,'');
+	                     
+	                     listOfSecurities.forEach(function(item){
+	                         console.log (item);
+	                         var  security ;
+	                         var  recommend ; 
+	                         if(securityMap[item]!==undefined){
+	                           security =securityMap[item];
+	                         } else { 
+	                           security =item;
+	                         }
+	                      
+		                       recommendMap.forEach(function(key){
+		                       input =security+' '+key ;
+		                                       
+                     
+	                     		var reObj = '('+input+')'+'(\\s+)(\\d+)' ;
+	                     		console.log('REgEx Object for  IAR Report'+reObj);
+	                     		var  re  =   new RegExp(reObj,"i");  
+			                     if ((m = re.exec(finalInput)) !== null){
+			                         console.log(m[0]);
+			                         console.log(m[1]);
+			                         console.log(m[2]);
+			                         console.log(m[3]);
+			                         console.log(m.length);
+			                         if (m.index === re.lastIndex) {
+			                             re.lastIndex++ ;
+			                         }
+			                        splittedString =m[0].split(' ');
+			                        var obj ={} ;
+			                        obj.securityName  =item ; //splittedString[0];
+			                        obj.recommend 	  =splittedString[1];
+			                        obj.targetprice   =splittedString[2];
+			                        outputArray.push(obj);
+			                        
+			                      }
+	                         }); 
+	                         
+	                     });   
+			                            
+	                     
+	               } else {
+	            	   		console.log("No Document Found");	
+	               }
+	               console.log(outputArray);
+	               res.json(outputArray);
+	                           	                   	             	          
+	          } 
+	    });  
+	    
+   	}
      
      function getCustomerRebalICRReport(req, res) {
          var mycollection = db.collection('CustomerStockData')
@@ -264,28 +256,27 @@ module.exports = function (app, db,watson,Regex){
      	}; 
         
         solrClient = retrieve_and_rank.createSolrClient(params);
-        console.log('Searching all documents.');
+        console.log('Searching all documents for EAR Content.....');
         var query = solrClient.createQuery();
         query.q({'*':'*'});
         var outputArray=[];
-        var  counter=1;
-        listOfSecurities.forEach(function(item){
-        	
-        	console.log (item);
-            solrClient.search(query, function(err, searchResponse){
+          solrClient.search(query, function(err, searchResponse){
           	  if(err) {
           	    console.log('Error searching for documents: ' + err);
           	  }
           	    else {
-          	    console.log('Found ' + searchResponse.response.numFound + ' documents.');
+          	    console.log('Found EAR' + searchResponse.response.numFound + ' documents.');
           	  
-          	  var input ='('+item+')';
-          	  //var input ='(ITC Limited)'; 
-          	  var recommend ='(Buy|Sell|Hold)'
-          	  var reObj = input+'(\\s+)(\\d+)(\\s)(\\d+)(\\s)'+recommend; 
-          	  console.log("Re ex varaible"+reObj);
-          	  var  re  =   new RegExp(reObj,"i");  
-          	  var m ;
+          	  
+          	listOfSecurities.forEach(function(item){
+             console.log (item);
+             var input ='('+item+')';
+         	  //var input ='(ITC Limited)'; 
+         	  var recommend ='(Buy|Sell|Hold)'
+         	  var reObj = input+'(\\s+)(\\d+)(\\s)(\\d+)(\\s)'+recommend; 
+         	  console.log("Re ex varaible"+reObj);
+         	  var  re  =   new RegExp(reObj,"i");  
+         	  var m ;
           	  if(searchResponse.response.numFound>0){
 	          	  if ((m = re.exec(searchResponse.response.docs[0].content)) !== null){
 	          	   /* console.log(m[0]);
@@ -296,8 +287,7 @@ module.exports = function (app, db,watson,Regex){
 	          	    console.log(m[5]);
 	          	    console.log(m[6]);
 	          	    console.log(m[7]);*/
-	          	    console.log(m.length);
-		          	    if (m.index === re.lastIndex) {
+	          	    if (m.index === re.lastIndex) {
 		          	        re.lastIndex++ ;
 		          	    }
 		          	    var  obj={}; 
@@ -305,20 +295,19 @@ module.exports = function (app, db,watson,Regex){
 		          	    obj.targetprice=m[5];
 		          	    obj.recommend=m[7];
 		          	   	outputArray.push(obj);
-		          	    console.log("Counter Value: "+counter);
-		          	    console.log("Securities Length: "+listOfSecurities.length );
-		          	    if(counter==listOfSecurities.length){
-		          	    	res.json(outputArray);
-		          	    }
-	          	          	    
+		               	    	          	          	    
 	          	   }  //end of inner if
-          	  counter++ ;
-          	 }//end of  outer if  
-           }	  
+          	 
+          	 }//end of  outer if
+          	  
+          	 });  //end of for each
+          	
+          	res.json(outputArray);
+           } // end of else	  
           
       });
             
-    });
+    
         
         
         

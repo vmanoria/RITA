@@ -120,23 +120,26 @@
     }
 
      $scope.getDateDifference = function(){
+    	 
         var frdDate="FRD" ;
         var furdDate="FURD";
         var frdDate1;
         var furdDate1 ;
         var ONE_DAY = 1000 * 60 * 60 * 24;
         var  temp ;
+        var now = new Date();
+        var  f  = new Date("dd-MMM-yyyy");
       //type="FRD_TCP";
       if(angular.isDefined($scope.custPnLReport)){  
               //alert('hi'+$scope.custPnLReport.FRD_TCP);
             angular.forEach($scope.custPnLReport,function(el) {
-            frdDate1 =el._id[frdDate];
+            frdDate1  =el._id[frdDate];
             frudDate1 =el._id[furdDate];
-             var date1_ms = new Date(frdDate1).getTime();
-             var date2_ms = new Date(frudDate1).getTime();
-             var difference_ms = Math.abs(date1_ms - date2_ms);
+             var date1_ms = new Date(frdDate1);
+             var date2_ms = new Date(frudDate1);
+             var difference_ms = Math.abs(date2_ms - date1_ms);
              temp=Math.round(difference_ms/ONE_DAY);
-
+             console.log('Date Difference::'+temp);
              }
         );
         

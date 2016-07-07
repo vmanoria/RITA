@@ -12,7 +12,7 @@
 
             DisplayICRService.getICRReport(customerID,function (response) {
                 $scope.custICRReport = response ; 
-               //$scope.prepareBarGraph();
+                $scope.prepareBarhartICRdata();
                 $scope.selectedCustomer =customerName;
             });
             
@@ -27,6 +27,7 @@
 
        }
      getCustomers();   
+     
      $scope.getTcpTotal = function(type){
          if(angular.isDefined($scope.custICRReport)){  
            var tcpTotal = 0 ;     
@@ -96,20 +97,7 @@
           
     }  
 
-      $scope.graphArray = [
-                  {
-                      "key": "Original Allocation",
-                      "values": [ [ "Consumer" ,50 ] ,[ "finance" ,20 ],["Healthcare" ,90 ] ]
-                  },
-                  {
-                      "key": "Current Allocation",
-                      "values": [ [ "Consumer" ,20 ] ,[ "finance" ,70 ],["Healthcare" ,10 ]  ]
-                  },
-
-
-
-             ]; 
-          
+         
         
 
 
@@ -133,5 +121,42 @@
         return tcpTotal1-temp ;
       }
      }*/
+      $scope.prepareBarhartICRdata=function() { 
+    	  $scope.graphArray=[];
+    	         var originalAllocValues = [];
+    	 var currentAllocValues = [];
+    	 angular.forEach($scope.custICRReport, function(obj) {
+    	 //obj.profitNloss=obj.TCMP-obj.TCP;
+    	 //obj.originalAllocPercentage=obj.TCP/$scope.getRebalTcpTotal();
+    	 //obj.currentAllocPercentage=obj.TCMP/$scope.getRebalTcmpTotal();
+    	 //obj.rebalancedAlloc = Math.round($scope.getRebalTcmpTotal()*obj.originalAllocPercentage);
+    	 originalAllocValues.push([obj['_id'].IndustrySegment,obj.TCP]);
+    	 currentAllocValues.push([obj['_id'].IndustrySegment,obj.TCMP]);
+    	 });  
+    	   
+    	 $scope.graphArray.push({"key": "Original Allocation","values":originalAllocValues});
+    	  
+    	 $scope.graphArray.push({"key": "Current Allocation","values":currentAllocValues});
+    	 }
+    	  
+
+		 $scope.xMultiBarFunction = function() {
+			return function(d) {
+				return d[0];
+			}
+		}
+		$scope.yMultiBarFunction = function() {
+			return function(d) {
+				return d[1];
+			}
+		}
+		var colorArray = [ '#FF0000', '#0000FF', '#FFFF00', '#00FFFF' ];
+		$scope.colorFunction = function() {
+			return function(d, i) {
+				return colorArray[i];
+			};
+		}
+    	  
+
    } 
 })();

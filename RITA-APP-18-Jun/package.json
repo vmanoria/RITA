@@ -4,6 +4,7 @@
   "description": "MVP1.0",
   "main": "server.js",
   "dependencies": {
+    "async": "^1.5.2",
     "body-parser": "^1.10.2",
     "express": "^4.11.1",
     "i18n": "^0.8.2",

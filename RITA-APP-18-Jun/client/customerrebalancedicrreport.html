@@ -64,7 +64,7 @@
 								<h4>{{selectedCustomer}}'s Rebalnced ICR</h4>
 								<h3>ICR(Industry Concentration Report)</h3>
 								
-											<div ng-controller="CustomerICRController">
+											<div ng-controller="CustomerRebalancedICRController">
 												<nvd3-multi-bar-chart
 													data="rebalancedDataForChart"
 													id="exampleId2"
@@ -75,9 +75,7 @@
 													showXAxis="true"
 													showYAxis="true"
 													showLegend="true"
-													 color="colorFunction()"
-													 forcey="[99000]">
-														<svg></svg>
+													<svg></svg>
 												</nvd3-multi-bar-chart>
 											</div>
 
