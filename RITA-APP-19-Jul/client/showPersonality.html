@@ -1,0 +1,24 @@
+<div class="container">
+    <h2>Personality Insights Sunburst Chart</h2>
+
+    <div class="row">
+        <div class="col-sm-6 col-xs-12">
+            <h3>Personality Profile</h3>
+            <div id="profile" class=""></div>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+            <h3>Personality Sunburst Chart</h3>
+            <div id="sunburstChart"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.getJSON('./data/profile.json', '', function (profile) {
+
+        $('#profile').append('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+
+        var chart = new PersonalitySunburstChart('sunburstChart');
+        chart.show(profile, './images/photo.jpg');
+    });
+</script>

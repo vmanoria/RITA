@@ -1,0 +1,126 @@
+    <div class="contentWrapper pageWidth">	
+            <h4 class="pageTitle">CUSTOMER’S INDUSTRY CONCENTRATION REPORT</h4>			
+			<div class="tabMenuWrapper"> 				
+				 
+				 
+				 	<div class="dropdown clearfix">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            {{selectedCustomer}}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li ng-repeat="customer in customers"><a ng-click="displayICRReport(customer.CustomerID,customer.CustomerName)">{{customer.CustomerName}}</a></li>
+                        </ul>
+                      </div>
+				
+				 <div class="tabContentWrapper">
+					
+									
+					<div id="arun" class="tab_content">  						
+						
+						<div class="bottomMargin20 clearFix">
+							<div class="floatL width75 marginR1">
+								<div class="scrollTable hideHorizontalScroll">				
+									<table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+										<thead>
+											<tr class="gridHeaderBlue">
+												<th>Cust ID</th>
+												<th>Industry Segment</th>
+												<th>TCP (Total  Cost<br>Price INR)</th>
+												<th class="bgGreen">TCMP (Total Current<br>Market Price INR)</th>																																			
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr class="evenRow" ng-repeat="custicr in custICRReport">
+												<td>{{custicr['_id'].custID}}</td>
+												<td>{{custicr['_id'].IndustrySegment}}</td>
+												<td class="txtRight">{{custicr.TCP}}</td>
+												<td class="txtRight">{{custicr.TCMP}}</td>																							
+											</tr>
+										</tbody>
+										
+										<tfoot>
+											<tr>											  
+											  <td>TOTAL</td>
+											  <td>&nbsp;</td>
+											  <td class="txtRight">{{getTcpTotal('TCP')}}</td>
+											  <td class="txtRight">{{getTcmpTotal('TCMP')}}</td>											  
+											</tr>
+										</tfoot>
+										
+									</table>					
+								</div>	
+							</div>
+							
+							<div class="floatL width24">
+								<div class="scrollTable hideHorizontalScroll">				
+									<table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+
+										<thead>
+											<tr class="gridHeaderBlue">
+												<th>Original<br>Allocation</th>
+												<th class="bgGreen">Current<br>Allocation</th>																						
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr class="evenRow" ng-repeat="custicr in custICRReport">
+												<td class="txtRight">{{custicr.TCP/getTcpTotal('TCP')*100 | number:2}}</td>
+												<td class="txtRight">{{custicr.TCMP/getTcmpTotal('TCMP')*100 | number:2}}</td>												
+											</tr>
+										</tbody>
+										
+										<tfoot>
+											<tr>										 
+											  <td>&nbsp;</td>
+											  <td>&nbsp;</td>
+											</tr>
+										</tfoot>
+										
+									</table>					
+								</div>	
+							</div>
+						</div>	
+
+						<div class="clearFix">							
+							<div class="chartBox">
+								<h4>Industry Concentration Report</h4>
+								<!--div style="display:none" id="arun_Barlabels">Consumer,Financials,Healthcare</div>
+								<div style="display:none" id="arun_BarOriginalData">11.37,79.86,8.77</div>
+								<div style="display:none" id="arun_BarCurrentData">8.46,82.88,8.66</div>
+								<div class="padd5">
+								    <!-- Place the Chart code here & remove the below image tag -->
+									<!--canvas id='arun_barchar' height="80"/>-->
+								<!--/div>-->
+
+											<div ng-controller="CustomerICRController">
+												<nvd3-multi-bar-chart
+											    	data="graphArray"
+											        id="exampleId"
+											        width="550"
+											        height="350"
+											        x="xMultiBarFunction()"
+													y="yMultiBarFunction()"
+													showXAxis="true"
+													showYAxis="true"
+													showLegend="true"
+													<svg></svg>
+											    </nvd3-multi-bar-chart>
+											</div>
+
+							</div>
+						</div>
+						
+					</div>
+					
+					
+
+						
+				 </div>
+			
+			</div>
+			  			
+           <div class="clearFix"></div>
+                
+    </div>

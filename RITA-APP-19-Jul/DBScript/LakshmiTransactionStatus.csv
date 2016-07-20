@@ -1,0 +1,6 @@
+Cust ID,Account Number,Date of Trans,Asset Type,Security ID,Trans Type,Quantity,Price (USD),Purchase Amount,Sale Amount
+300,123458,4/27/2015,Equity,JPMC,Buy,3500,72,252000,0
+300,123458,4/28/2015,Equity,CITI,Buy,12000,16,192000,0
+300,123458,4/29/2015,Equity,BNY,Buy,1250,11,13750,0
+300,123458,4/30/2015,Equity,BNY,Sell,250,10.45,0,2612.5
+300,123458,4/30/2015,Equity,CITI,Sell,1200,15,0,18000

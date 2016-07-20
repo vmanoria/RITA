@@ -1,0 +1,11 @@
+---
+applications:
+- name: RITAAPP-NEW
+  command: node server.js
+  path: .
+  memory: 1G
+  services:
+  - watsonpi
+  - rirarrapi
+  - watsonalchemy
+  

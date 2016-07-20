@@ -1,0 +1,65 @@
+<!-- Navigation Starts -->
+<nav>
+    <h1><a href="#/about"><img src="images/arrow.jpg" width="18" height="21" alt=""> RITA</a></h1>
+    <div class="menu">
+        <select ng-model="customer" ng-options="customer as customer.CustomerName for customer in customerList" ng-change="analyze(customer)" />
+
+        <ul>
+            <li><a href="#/about">About Us</a></li>
+            <li><a href="#/inputPI" class="active">Personality Analysis</a></li>
+            <li><a href="#/customerPnLReport">Profit & Loss</a></li>
+            <li><a href="#/customerRebalancedICRReport">Re-balanced</a></li>
+            <li><a href="#/recommendedPortfolio">Recommended</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Content Starts -->
+
+<div class="summary" ng-if="progress != 'Done'">
+    <br>
+    <br>
+    <br>
+    <h2>{{message}} {{customer.CustomerName}}{{dots}} </h2>
+</div>
+<div ng-if="progress == 'Done'">
+    <div class="wrapper">
+        <div class="profilr-info">
+            <h2>Profile Information</h2>
+            <div><img ng-src="images/{{PhotoFile}}" width="102" height="104" align="left">
+                <p><strong>{{selectedCustomer}}</strong></p>
+                <p>DOB: {{DateOfBirth}}</p>
+                <p>Location: {{City}} </p>
+                <p>Status: {{MaritalStatus}}</p>
+                <p>Customer ID: {{CustomerID}}</p>
+            </div>
+        </div>
+        <div class="summary">
+            <h2>Summary</h2>
+        </div>
+        <div class="summary" ng-bind-html="summary">
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="personality">
+            <hr>
+            <h2>Personality Sunburst Chart</h2>
+            <div class="col-sm-6 col-xs-12">
+                <div id="sunburstChart"></div>
+            </div>
+        </div>
+    </div>
+    <div ng-controller="PersonalityInsightController">
+        <script>
+            var PhotoFile = $('[ng-controller="PersonalityInsightController"]').scope().PhotoFile;
+
+            $.getJSON('./data/profile.json', '', function (profile) {
+
+                $('#profile').append('<pre>' + JSON.stringify(profile, null, 2) + '</pre>');
+
+                var chart = new PersonalitySunburstChart('sunburstChart');
+                chart.show(profile, './images/' + PhotoFile);
+            });
+        </script>
+    </div>
+</div>

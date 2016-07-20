@@ -1,0 +1,33 @@
+db.customer.find({},{
+		"CustomerID" : 1,
+		"CustomerName" :1,
+		"City" : 1,
+		"DateOfBirth" : 1,
+		"MaritalStatus" :1,
+		"Dependents" : 1,
+		"RiskType" : 1
+		});
+		
+db.customer.find({},{
+	"CustomerID" : 1,
+	"stocks.SecurityID" :1,
+	"stocks.SecurityName" :1,
+	"stocks.Portfolio":1
+}).pretty();
+
+db.customer.find({},{
+	"CustomerID" : 1,
+	"AccountNumber" : 1,
+	"stocks.SecurityID" :1,
+	"stocks.SecurityName" :1,
+	"stocks.AssetType":1,
+	"stocks.Transactions":1
+}).pretty();
+
+db.customer.find({},{
+	"stocks.AssetType" : 1,
+	"stocks.SecurityID" :1,
+	"stocks.SecurityName" :1,
+	"stocks.IndustrySegment":1
+}).distinct();
+

@@ -1,0 +1,399 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+body {
+    margin: 0px;
+    padding: 0px 0 0 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #282828;
+    transition: ease-in-out .3s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+nav,
+header,
+figure,
+div,
+footer,
+table,
+thead,
+tr,
+th {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+a {
+    color: #3184bb;
+    text-decoration: none;
+    transition: ease-in-out .3s;
+}
+
+a:hover {
+    color: #9ba2a6;
+}
+
+select,
+input:focus {
+    outline: none;
+}
+
+.active {
+    color: #3598db!important;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.marginTop-15 {
+    margin-top: -15px;
+}
+
+.padding {
+    padding: 20px;
+}
+
+.padding-left0 {
+    padding-left: 0px;
+}
+
+padding-right0 {
+    padding-right: 0px;
+}
+
+.alignLft {
+    text-align: left;
+}
+
+.green {
+    color: #0F0;
+}
+
+.red {
+    color: #c0504d;
+}
+
+.width50 {
+    width: 50%;
+    float: left;
+}
+
+.width60 {
+    width: 60%;
+    float: left;
+}
+
+.width40 {
+    width: 40%;
+    float: left;
+}
+
+.img-responsive {
+    width: 100%;
+    height: auto;
+}
+
+p {
+    line-height: 18px;
+    font-size: 13px;
+    text-align: justify;
+}
+
+td p a:hover {
+    text-decoration: underline;
+    color: #3184bb;
+}
+
+h2,
+h3 {
+    font-size: 20px;
+    color: #282828;
+    font-weight: normal;
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+h3 span {
+    color: #999;
+}
+
+.report {
+    border-bottom: 0px transparent;
+    border-right: 0px transparent;
+    border-left: 0px solid transparent;
+}
+
+.report th {
+    border-right: 2px solid #757575;
+}
+
+.report th:last-child {
+    border-right: 0px;
+}
+
+
+/****** Header Starts ********/
+
+header {
+    background: #2c3e50;
+    padding: 18px;
+    font-size: 20px;
+}
+
+header a {
+    color: #9ba2a6;
+}
+
+header a:hover {
+    color: #3f9fd6;
+}
+
+
+/****** Navigation Starts ********/
+
+nav {
+    background: #ecf0f1;
+    padding: 20px;
+}
+
+nav h1 {
+    display: inline-block;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+nav h1 img {
+    vertical-align: middle;
+}
+
+.menu {
+    width: 60%;
+    float: right;
+}
+
+.menu select {
+    width: 150px;
+    height: 30px;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 2px solid #CCC;
+    color: #636566;
+    margin-top: -4px;
+}
+
+.menu ul {
+    list-style: none;
+    float: right;
+    margin-top: 3px;
+}
+
+.menu ul li {
+    float: left;
+    font-size: 14px;
+    text-align: right;
+    border-right: 2px solid #484a4a;
+}
+
+.menu ul li a {
+    padding: 0 10px;
+    color: #484a4a;
+}
+
+.menu ul li a:hover {
+    color: #3598db;
+}
+
+.menu ul li:last-child {
+    border-right: 0;
+}
+
+
+/******* Content Starts *********/
+
+.wrapper {
+    width: 95%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.profilr-info {
+    width: 40%;
+    float: left;
+}
+
+.profilr-info p {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.profilr-info img {
+    margin-right: 10px;
+}
+
+.summary {
+    width: 60%;
+    float: right;
+}
+
+.summary p {
+    font-size: 13px;
+    color: #535353;
+    line-height: 18px;
+    padding-bottom: 10px;
+}
+
+.personality {
+    display: block;
+}
+
+.personality figure {
+    display: block;
+    text-align: center;
+    padding: 20px;
+}
+
+.chartlft {
+    width: 50%;
+    float: left;
+    border-right: 2px dashed #333;
+    padding-bottom: 20px;
+}
+
+.chartrit {
+    width: 50%;
+    float: left;
+}
+
+.chartlft,
+.chartrit h2 {
+    text-align: center;
+}
+
+.graph {
+    width: 60%!important;
+    float: left;
+}
+
+.graphname {
+    float: right;
+    margin-top: 50px;
+    margin-right: 50px;
+}
+
+.graph img,
+.graphname img {
+    width: 100%;
+    height: auto;
+}
+
+.graphname p {
+    font-size: 13px;
+    color: #333;
+    text-align: left;
+    padding-bottom: 10px;
+    vertical-align: middle;
+}
+
+.graphname p span.blue {
+    background: #4bacc6;
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-right: 3px;
+}
+
+.graphname p span.red {
+    background: #c0504d;
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-right: 3px;
+}
+
+.graphname p span.green {
+    background: #9bbb59;
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-right: 3px;
+}
+
+.graphname p span.purple {
+    background: #8064a2;
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-right: 3px;
+}
+
+.graphname p span.yellow {
+    background: #e56c0a;
+    width: 13px;
+    height: 13px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-right: 3px;
+}
+
+th,
+td {
+    text-align: center;
+    padding: 5px 10px;
+    font-weight: normal;
+}
+
+.rebalanced-graph {
+    width: 70%;
+    margin: 0 auto;
+    float: none;
+    border-right: 0px;
+}
+
+.benifits {
+    margin: 0 0 0 20px;
+    padding: 0px;
+}
+
+.benifits li {
+    padding: 5px;
+}
+
+.sub-benifit {
+    margin: 10px 0 0 30px;
+    padding: 0px;
+    list-style-type: lower-alpha;
+}
+
+.sub-benifit li {
+    padding: 5px;
+}
+
+.scrollTable300 {
+    max-height: 620px;
+    overflow-y: auto;
+}

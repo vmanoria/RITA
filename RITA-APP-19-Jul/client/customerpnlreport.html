@@ -1,0 +1,159 @@
+<!-- Navigation Starts -->
+<nav>
+    <h1><a href="#/about"><img src="images/arrow.jpg" width="18" height="21" alt=""> RITA</a></h1>
+    <div class="menu">
+        <select ng-model="selectedCustomer" ng-change="displayPnLReport(selectedCustomer)">
+            <option ng-repeat="customer in customers" value="{{customer.CustomerID}}">
+                {{customer.CustomerName}}
+            </option>
+
+        </select>
+
+        <ul>
+            <li><a href="#/about">About Us</a></li>
+            <li><a href="#/inputPI">Personality Analysis</a></li>
+            <li><a href="#/customerPnLReport" class="active">Profit & Loss</a></li>
+            <li><a href="#/customerRebalancedICRReport">Re-balanced</a></li>
+            <li><a href="#/recommendedPortfolio">Recommended</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Content Starts -->
+<div class="wrapper" ng-if="custPnLReport==undefined">
+<center><h2>No data available. Select a different customer.</h2></center>
+</div>
+<div class="wrapper" ng-if="custPnLReport!=undefined">
+    <div class="chartmain">
+        <div class="chartlft">
+            <h2>Original Allocation</h2>
+
+            <div class="graph" ng-controller="CustomerPnLController">
+                <nvd3-pie-chart data="graphArray" id="originalAllocationId" width="650" height="450" x="xFunction()" y="yFunction()" showLabels="true" labelType="percent" showLegend="true">
+                    <svg height="450"></svg>
+                </nvd3-pie-chart>
+
+            </div>
+
+        </div>
+        <div class="chartrit">
+            <h2>Current Allocation</h2>
+            <div class="graph" style="margin-left:30px;" ng-controller="CustomerPnLController">
+                <nvd3-pie-chart data="graphCurrentArray" id="currentAllocationId" width="650" height="450" x="xFunction()" y="yFunction()" showLabels="true" labelType="percent" showLegend="true">
+                    <svg height="450"></svg>
+                </nvd3-pie-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="padding" ng-if="custPnLReport!=undefined">
+    <table cellpadding="0" cellspacing="0" border="1" width="100%" bordercolor="#757575">
+
+        <thead bgcolor="#90d5e6">
+            <tr>
+                <th class="alignLft">Security ID</th>
+                <th class="alignLft">Security Name</th>
+                <th>First Report
+                    <br> Date(FRD)</th>
+                <th>Average Coast Price
+                    <br> (INR) for FRD</th>
+                <th>Quality for FRD</th>
+                <th>Follow up Report
+                    <br> Date(FURD)</th>
+                <th>Current Market Price
+                    <br>(INR) for FURD</th>
+                <th>Quality for FURD</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr ng-repeat="custpnl in custPnLReport">
+                <td class="alignLft">{{custpnl['_id'].SecurityID}}</td>
+                <td class="alignLft">{{custpnl['_id'].SecurityName}}</td>
+                <td>{{custpnl['_id'].FRD}}</td>
+                <td>{{custpnl['_id'].FRD_Avg_CostPrice}}</td>
+                <td>{{custpnl['_id'].FRD_Quantity}}</td>
+                <td>{{custpnl['_id'].FURD}}</td>
+                <td>{{custpnl['_id'].FURD_Avg_CostPrice}}</td>
+                <td>{{custpnl['_id'].FURD_Quantity}}</td>
+            </tr>
+        </tbody>
+
+    </table>
+    <br>
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" bordercolor="#757575">
+        <tr>
+            <td width="75%" style="padding:0px;">
+                <table cellpadding="0" cellspacing="0" border="1" width="100%" bordercolor="#757575">
+
+                    <thead bgcolor="#90d5e6">
+                        <tr>
+                            <th class="alignLft">Security ID</th>
+                            <th class="alignLft">Security Name</th>
+                            <th>Total Cost
+                                <br> Price INR</th>
+                            <th>Total Current
+                                <br>Market Place(INR)</th>
+                            <th>Profit & Loss INR</th>
+                            <th>Profit & Loss
+                                <br> Percentage</th>
+                            <th>Annualized
+                                <br> Return</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr ng-repeat="custpnl in custPnLReport">
+                            <td class="alignLft">{{custpnl['_id'].SecurityID}}</td>
+                            <td class="alignLft">{{custpnl['_id'].SecurityName}}</td>
+                            <td>{{custpnl['_id'].FRD_TCP}}</td>
+                            <td>{{custpnl['_id'].FURD_TCP}}</td>
+                            <td>{{custpnl['_id'].PROFIT_LOSS}}</td>
+                            <td ng-if="custpnl['_id'].pnlPercentage>=0" class="green">{{custpnl['_id'].pnlPercentage | number:2}}</td>
+							<td ng-if="custpnl['_id'].pnlPercentage<0" class="red">{{custpnl['_id'].pnlPercentage | number:2}}</td>
+                            <td ng-if="custpnl['_id'].annualizedReturn>=0" class="green">{{custpnl['_id'].annualizedReturn | number:2}}</td>
+							<td ng-if="custpnl['_id'].annualizedReturn<0" class="red">{{custpnl['_id'].annualizedReturn | number:2}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">TOTAL</td>
+                            <td>{{getTotal('FRD_TCP')}}</td>
+                            <td>{{getTotal('FURD_TCP')}}</td>
+                            <td>{{getTotal('PROFIT_LOSS')}}</td>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </td>
+            <td width="20%" style="padding:0px 0 0 15px;">
+                <table cellpadding="0" cellspacing="0" border="1" width="100%" bordercolor="#757575">
+
+                    <thead bgcolor="#90d5e6">
+                        <tr>
+                            <th class="alignLft">Original
+                                <br> Allocation</th>
+                            <th class="alignLft">Current
+                                <br> Allocation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="custpnl in custPnLReport">
+                            <td class="alignLft">{{custpnl['_id'].FRD_TCP/getTotal('FRD_TCP')*100 | number:2}}</td>
+                            <td class="alignLft">{{custpnl['_id'].FURD_TCP/getTotal('FURD_TCP')*100 | number:2}}</td>
+                        </tr>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">&nbsp;</td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</div>
