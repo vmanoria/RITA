@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="RitaApp">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wealth Management</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+    <!-- jQuery & other Javascript files placed here -->
+    <script src="js/jquery.min.js"></script>
+
+    <!-- Angular Javascript File -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.js"></script>
+    <!-- PI MVP 2 -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-sanitize.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.14/d3.min.js"></script>
+    <script src="https://rawgit.com/ibm-silvergate/personality-sunburst-chart/master/bin/personality-sunburst-chart.standalone.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/pageFn.js"></script> 
+    <script src="js/Chart.min.js"></script>
+
+    <!-- Page style -->
+    <!--link href="css/pageLayout.css" rel="stylesheet"-->
+     <link rel="stylesheet" href="css/nv.d3.css"/>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+   
+   <script src="controllers/customer.input.controller.js"></script>
+    <script src="controllers/customer.pnl.controller.js"></script>
+    <script src="controllers/customer.icr.controller.js"></script>
+    <script src="controllers/customer.rebalanced.icr.controller.js"></script>
+    <script src="services/display.data.service.js"></script>
+    <script src="services/display.pnlreport.service.js"></script>
+    <script src="services/display.icrreport.service.js"></script>
+    <script src="services/alchemynews.service.js"></script>
+
+    
+    <!--Pie Chart Dependencies-->
+    <script src="js/angularjs-nvd3-directives.js"></script>
+    <script src="js/nv.d3.js"></script>
+    <script src="js/d3.js"></script>
+    
+	<!-- Personality Insight Controllers -->
+    <script src="controllers/pi.service.controller.js"></script>
+    <script src="controllers/show.pi.controller.js"></script>
+	<script src="controllers/file.upload.controller.js"></script>
+    <script src="services/handle.pi.service.js"></script>
+    <!-- PI MVP 2 -->
+    <script src="js/personality-text-summary.standalone.js"></script>
+    
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+        function submitForm() {
+			document.getElementById("submitbtn").disabled=true;
+			document.getElementById("submitbtn").value="Uploading...";
+            console.log("submit event");
+            var fd = new FormData(document.getElementById("uploadForm"));
+            //fd.append("label", "WEBUPLOAD");
+            $.ajax({
+              url: "/entities",
+              type: "POST",
+              data: fd,
+              processData: false,  // tell jQuery not to process the data
+              contentType: false   // tell jQuery not to set contentType
+            }).done(function( data ) {
+                alert("File uploaded successfully");
+				document.getElementById("submitbtn").disabled=false;
+				document.getElementById("submitbtn").value="Upload Document";
+            }).fail(function() {
+				alert("File upload failed");
+				document.getElementById("submitbtn").disabled=false;
+				document.getElementById("submitbtn").value="Upload Document";
+			});
+            return false;
+        }
+		 function clearRecords() {
+			
+            var fd = new FormData(document.getElementById("uploadForm"));
+            //fd.append("label", "WEBUPLOAD");
+            $.ajax({
+              url: "/clear",
+              type: "POST",
+              data: fd,
+              processData: false,  // tell jQuery not to process the data
+              contentType: false   // tell jQuery not to set contentType
+            }).done(function( data ) {
+                alert("Cache cleaned successfully");
+				
+            });
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+
+<header><a href="#/about">Wealth Management</a></header>
+<!-- Navigation Starts -->
+<nav>
+    <h1><a href="#/about"><img src="images/arrow.jpg" width="18" height="21" alt=""> RITA</a></h1>
+    <div class="menu">
+        
+
+        <ul>
+            <li><a href="/#/about">About Us</a></li>
+            <li><a href="/#/customerPnLReport">Profit & Loss</a></li>
+            <li><a href="/#/customerRebalancedICRReport" class="active">Re-balanced</a></li>
+			<li><a href="#/inputPI">Personality Analysis</a></li>
+            <li><a href="/#/recommendedPortfolio">Recommended</a></li>
+			<li><a href="/fileUpload.html" class="active">Upload</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Content Starts -->
+
+<div class="clearfix"></div>
+<div class="padding">
+    <table cellpadding="0" cellspacing="0" border="1" width="70%" bordercolor="#757575" align="center">
+	<form name="uploadForm" id="uploadForm" action="/entities" method="post" enctype="multipart/form-data" onsubmit="return submitForm();"> 
+	    <thead bgcolor="#90d5e6">
+            <tr class="gridHeaderBlue">
+				<th>Select PDF document to upload :</th>
+					
+				<th><input id="file" type="file" name="file" accept='application/pdf', title='Choose a PDF document to upload' /></th>
+				<th><input id="submitbtn" type="button" value="Upload Document" name="submit" onclick="return submitForm();"/></th>
+				<th><input id="clearbtn" type="button" value="Clean Cache" name="submit"  onclick="return clearRecords();"/></th>
+				
+			</tr>
+        </thead>
+       
+	</form>
+    </table>
+
+</div>
+</body>
+
+</html>

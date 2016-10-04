@@ -36,10 +36,12 @@ module.exports = function (app, db,watson,Regex){
                       SecurityID:"$stocks.SecurityID",
                       SecurityName:"$stocks.SecurityName",
                       AssetType:"$stocks.AssetType",
+                     
                       FRD:{ $arrayElemAt:["$stocks.Portfolio.First_Report_Date",0]},
                       FRD_Avg_CostPrice:{ $arrayElemAt:["$stocks.Portfolio.AverageCostPrice_FRD_INR",0]},
                       FRD_Quantity:{ $arrayElemAt:["$stocks.Portfolio.Quantity_For_FRD",0]},
                       FRD_TCP : {$multiply:[{ $arrayElemAt:["$stocks.Portfolio.Quantity_For_FRD",0]},{ $arrayElemAt:["$stocks.Portfolio.AverageCostPrice_FRD_INR",0]}]},
+
                       FURD:{ $arrayElemAt:["$stocks.Portfolio.FollowUp_Report_Date",0]},
                       FURD_Avg_CostPrice:{ $arrayElemAt:["$stocks.Portfolio.CurrentMarketPrice_FURD_INR",0]},
                       FURD_Quantity:{ $arrayElemAt:["$stocks.Portfolio.Quantity_For_FURD",0]},
@@ -52,7 +54,7 @@ module.exports = function (app, db,watson,Regex){
                   }}
                }
            ],
-            function (err,docs) {
+            function (err,docs){
             console.log(docs);
             res.json(docs);
         });
@@ -82,8 +84,16 @@ module.exports = function (app, db,watson,Regex){
          });
     }
     
-    //function getIARList(listOfSecurities){
-     function getIARList(req,res){
+ function getIARList(req,res){
+	 var mycollection = db.collection('stockInfo')
+	 mycollection.find({},
+		function (err, docs) {
+			console.log("For Ajay:"+docs);
+			res.json(docs);
+		});
+ 
+ }
+  /*   function getIARList(req,res){
     	   var listOfSecurities  = [] ;
      	   listOfSecurities   =req.params['listOfSecurities'].split(',');
     	   //var listOfSecurities = ['ITC','SUN PHARMA','EMAMI'];
@@ -122,7 +132,7 @@ module.exports = function (app, db,watson,Regex){
         solrClient = retrieve_and_rank.createSolrClient(params);
         searchDocument(res,solrClient,listOfSecurities);
      }
-   
+  */ 
      function searchDocument(res,solrClient,listOfSecurities){
     	 var securityMap      = {'EMAMI':'EMAMI*'};
  	     var recommendMap     = ['Sell','Neutral','Buy'];

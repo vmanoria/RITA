@@ -1,0 +1,246 @@
+html,
+body {
+	margin:0;
+	padding:0;
+	padding-top: 20px;
+	height: 100%;
+}
+body {
+	background: #eeeeee;		
+	margin:0;
+	padding:0;
+	padding-top: 20px;
+	font-family: 'Arial', 'sans-serif';	
+	color: #333;	
+}
+a{
+	outline:none;	
+}
+.pageWidth{
+	width:980px; margin:0 auto;
+}
+.headerWrapper{
+	height:100px;
+	background:#fff;
+	padding:0;
+}
+.headerWrapper H2{
+	padding:0;	
+    margin: 35px 0 0 0;
+	display: inline-block;
+}
+.headerWrapper H3{
+	font-weight: normal;
+    margin: 5px 0 0;
+}
+.pageTitle{
+	margin:0 0 15px 0;
+}
+
+.contentWrapper{	
+	padding: 20px 0; min-height:450px;
+	margin-bottom:30px;
+}
+.txtBlue{
+	color:#3f84f6;
+}
+.bottomMargin30{
+	margin-bottom:30px;
+}
+.bottomMargin20{
+	margin-bottom:20px;
+}
+.width75{
+	width:75%;
+}
+.width24{
+	width:24%;
+}
+.width49{
+	width:49%;
+}	
+.marginR1{
+	margin-right:1%;
+}
+.marginR2{
+	margin-right:2%;
+}
+.padd5{
+	padding:5px;
+}
+.dropDownWrapper{
+	margin-bottom:10px;
+}
+.dropDownControl {
+	border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    font-size: 13px;
+    height: 30px;
+    margin: 0;
+    outline: medium none;
+    padding: 5px;
+    width: 120px;
+}
+/* -------------------------- */
+.viewCSVFileTitle{
+	color: #3f84f6;
+    font-size: 16px;
+    line-height: 16px;
+    margin: 7px 0 8px 0;
+    text-align: center;
+	font-weight:bold;
+	/* border-bottom: 1px solid #ccc; */
+	padding-bottom: 5px;	
+}
+.viewCSVFileBox {   
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 10px;	
+	text-align: center;	
+}
+.viewCSVFileBox:last-child {
+	margin-right:0;
+}
+
+.scrollTable{
+    max-height:200px;
+	overflow-y:auto;	
+}
+.hideHorizontalScroll{
+	overflow-x:hidden;
+}
+
+
+/* Grid style starts ***************************** */
+.gridBlue{
+	width:100%; border-collapse:collapse;
+}
+.gridBlue thead tr th, .gridBlue tbody tr td{
+	border-collapse:collapse;
+	border:1px solid #fff;
+}
+.gridBlue thead tr th{
+	background:#4f81bc;
+	padding:6px;	
+	font-size:13px; font-weight:normal;
+	color:#fff;
+	border-left: none;
+    border-top: none;
+}
+.gridBlue thead tr th:last-child, .gridBlue tbody tr td:last-child{
+	border-right:none;
+}
+.gridBlue tr td{
+	padding:6px;
+	font-size:13px;
+	font-weight:normal;
+	color:#000;
+}
+.gridBlue tr td a{
+	color:#00F; text-decoration:underline;
+}
+.gridBlue .plusIcon{
+	margin-right:10px;
+}
+.gridHeaderBlue{
+	background:#4f81bc; 
+	border-bottom:1px solid #fff;	
+}
+.oddRow{
+	background:#b2cbef; color:#000;
+	border-bottom:1px solid #fff;
+}
+.evenRow{
+	background:#d5e3fe; color:#000;
+	border-bottom:1px solid #fff;
+}
+.gridBlue tfoot tr td{
+	background:#fff;
+	color:#000;
+	border-right:#cfcfcf solid 1px;
+	border-bottom: 1px solid #cfcfcf;
+}
+.gridBlue tfoot tr td:last-child{
+	border-right:none;
+}
+.gridBlue thead tr th.bgGreen, .bgGreen{
+	background:#2c9197;
+}
+
+/* Tab Menu starts */
+.tabMenuWrapper ul {
+    margin: 0;
+    padding: 0;
+}
+.tabMenuWrapper ul li {
+    list-style-position: outside;
+    list-style-type: none;
+}
+.tabNav ul{
+	width:100%; height:32px;
+}
+.tabNav ul li{
+	float:left; list-style-type:none; margin-right:2px; color:#333; background:#d8d8d8;
+}
+.tabNav ul li.selected{
+	background:#333;
+}
+.tabNav ul li.selected a.basictabItem{
+	color:#fff; 
+}
+.tabNav ul li a.basictabItem{
+	color:#333; font-size:13px; text-decoration:none; padding:7px 10px;
+	display:inline-block;	
+}
+.tabContentWrapper{
+	border:1px solid #d8d8d8; 
+	padding:10px;
+	margin-top: -2px;	
+	overflow:auto;
+}
+.tab_content{
+	height:100%; color:#333;  
+}
+
+/* Chart styles--------------------------*/
+.chartBox{
+	text-align:center;
+	background:#fff;
+	padding:8px 0;
+}
+.chartBox h4{
+	margin: 5px 0;
+}
+	
+/* Global styles------------------------- */
+.floatL{
+	float:left;
+}
+.floatR{
+	float:right;
+}
+.txtRight{
+	text-align:right;
+}
+.txtLeft{
+	text-align:left;
+}
+.clearFix:after {	
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+	}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+/* Footer styles ----------------------*/
+.footer{
+	background: #cfcfcf;
+    padding: 10px 0;
+	position:fixed; bottom:0; left:0; width:100%;
+}
+.footer .copyRight{
+	font-size:12px; font-weight:normal;
+}

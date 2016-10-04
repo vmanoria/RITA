@@ -1,0 +1,112 @@
+'use strict';
+var watson = require('watson-developer-cloud');
+var fs = require('fs');
+var async = require('async');
+
+var document_conversion = watson.document_conversion({
+  username:     process.env.DC_USER_NAME || '<document_conversion_user_name>',
+  password:     process.env.DC_PASSWORD || '<document_conversion_password>',
+  version:      'v1',
+  version_date: '2016-06-30'
+});
+
+// if bluemix credentials exists, then override local
+var alchemyLanguage = watson.alchemy_language({
+  api_key: process.env.API_KEY || '<api_key>'
+});
+
+function convert_document(req) {
+
+}
+module.exports.entities = function(req, res, next) {
+
+  if (!req.file  && !req.file.path) {
+    return next({ error: 'Missing required parameter: file', code: 400 });
+  }
+  // convert a single document
+  document_conversion.convert({
+    // (JSON) ANSWER_UNITS, NORMALIZED_HTML, or NORMALIZED_TEXT
+    file: fs.createReadStream(req.file.path),
+    conversion_target: document_conversion.conversion_target.ANSWER_UNITS
+	,
+    // Add custom configuration properties or omit for defaults
+    pdf: {
+      heading: {
+        fonts: [
+          { level: 1, min_size: 25 },
+          { level: 2, min_size: 12, max_size: 12, bold: true },
+          { level: 3, min_size: 9, max_size: 10, bold: true }
+        ]
+      }
+    }
+  }, function (err, response) {
+    if (err) {
+      console.error(err);
+      res.send(err);
+    } else {
+      console.log("Document converted successfully.");
+      getEntities(getSections(response), res);
+    }
+  });
+};
+
+function getEntities(sections, res) {
+
+  var allEntities = [];
+  async.each(sections, function(section, callback) {
+      // Perform operation on section here.
+      alchemyLanguage.entities({
+        text: section.title + "\n" + section.text,
+        model:process.env.MODEL_ID || "<model_id>"
+      }, function(err, response) {
+        if (err) {
+          console.log('error', err);
+          callback();
+        } else {
+          /*console.log("==========================");
+          console.log("Section title:: " + section.title);
+          console.log(JSON.stringify(response.entities));
+          console.log("==========================");*/
+          if (response.entities.length > 0) {
+            response.entities.forEach(function(entity) {
+              allEntities.push(entity);
+            });
+          }
+          callback();
+        }
+      });
+  }, function(err) {
+      // if any of the sections produced an error, err would equal that error
+      if( err ) {
+        // One of the iterations produced an error.
+        // All processing will now stop.
+        console.log('A section failed to process');
+        res.send(allEntities);
+      } else {
+        console.log('All sections have been processed successfully');
+        console.log(JSON.stringify(allEntities));
+        res.send(allEntities);
+      }
+  });
+}
+
+function getSections(response){
+  var sections = [];
+  for (var i in response.answer_units) {
+    var answer = response.answer_units[i];
+    var title = answer.title;
+    var section = {};
+    var text = "";
+    for (var j in answer.content) {
+      if (answer.content[j].media_type == "text/plain") {
+        text = answer.content[j].text;
+      }
+    }
+    section["title"] = title;
+    section["text"] = text;
+    if (section.text.trim().length > 0) {
+      sections.push(section);
+    }
+  }
+  return sections;
+}

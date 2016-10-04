@@ -18,7 +18,7 @@
             
         }
         
-        function getCustomers() {
+        function getCustomers(){
             DisplayICRService.getCustomers(function (response) { 
               console.log("getCustomers");
               $scope.customers = response;

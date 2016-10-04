@@ -1,0 +1,160 @@
+<div class="contentWrapper pageWidth">
+    <div class="viewCSVFileBox bottomMargin30">
+        <p class="viewCSVFileTitle">Customer’s Profile</p>
+        <div class="scrollTable hideHorizontalScroll">
+            <table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+
+                <thead align="center">
+                    <tr class="gridHeaderBlue" align="center">
+                        <th>Customer ID</th>
+                        <th>Name</th>
+                        <th>City</th>
+                        <th>Date of Birth</th>
+                        <th>Marital Status</th>
+                        <th>Dependents</th>
+                        <th>Risk Type</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="evenRow" ng-repeat="custPortfolio in custPortfolios">
+                        <td>{{custPortfolio['CustomerID']}}</td>
+                        <td>{{custPortfolio['CustomerName']}}</td>
+                        <td>{{custPortfolio.City}}</td>
+                        <td>{{custPortfolio['DateOfBirth']}}</td>
+                        <td>{{custPortfolio['MaritalStatus']}}</td>
+                        <td>{{custPortfolio.Dependents}}</td>
+                        <td>{{custPortfolio['RiskType']}}</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="viewCSVFileBox bottomMargin30">
+        <p class="viewCSVFileTitle">Customer’s Portfolio Profile</p>
+        <div class="scrollTable hideHorizontalScroll">
+            <table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+                <thead>
+                    <tr class="gridHeaderBlue">
+                        <th>Customer ID</th>
+                        <th>Security ID</th>
+                        <th>Security Name</th>
+                        <th>FRD</th>
+                        <th>Avg Cost Price</th>
+                        <th>Quantity (FRD)</th>
+                        <th>FURD</th>
+                        <th>CMP (FRUD)</th>
+                        <th>Quantity (FRUD)</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="custPortfolio in custPortfolios">
+                    <tr class="evenRow" ng-repeat="stock in custPortfolios[$index].stocks">
+                        <td>{{custPortfolio['CustomerID']}}</td>
+                        <td>{{stock['SecurityID']}}</td>
+                        <td>{{stock['SecurityName']}}</td>
+                        <td>{{stock.Portfolio[0].First_Report_Date}}</td>
+                        <td>{{stock.Portfolio[0].AverageCostPrice_FRD_INR}}</td>
+                        <td>{{stock.Portfolio[0].Quantity_For_FRD}}</td>
+                        <td>{{stock.Portfolio[1].FollowUp_Report_Date}}</td>
+                        <td>{{stock.Portfolio[1].CurrentMarketPrice_FURD_INR}}</td>
+                        <td>{{stock.Portfolio[1].Quantity_For_FURD}}</td>
+                    </tr>
+
+                    <!--
+                    <div ng-controller="CustomerInputController">
+                        <div>
+                            <!--<tr class="evenRow" ng-repeat="stock in custPortfolio">
+                            <tr ng-repeat="custPortfolio in custPortfolios">
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <td>{{custPortfolio.CustomerID}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                <td colspan="8">
+                                    <table>
+                                        <tr ng-repeat="stock in custPortfolios[0].stocks">
+                                            <td>{{stock.SecurityID}}</td>
+                                            <td colspan="2">{{stock.SecurityName}}</td>
+                                            <td>{{stock.Portfolio[0].First_Report_Date}}</td>
+                                            <td>{{stock.Portfolio[0].AverageCostPrice_FRD_INR}}</td>
+                                            <td>{{stock.Portfolio[0].Quantity_For_FRD}}</td>
+                                            <td>{{stock.Portfolio[1].FollowUp_Report_Date}}</td>
+                                            <td>{{stock.Portfolio[1].CurrentMarketPrice_FURD_INR}}</td>
+                                            <td>{{stock.Portfolio[1].Quantity_For_FURD}}</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                        </div>
+                    </div>
+            -->
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="viewCSVFileBox bottomMargin30">
+        <p class="viewCSVFileTitle">Security Industry Segments</p>
+        <div class="scrollTable hideHorizontalScroll">
+            <table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+
+                <thead>
+                    <tr class="gridHeaderBlue">
+                        <th>Security ID</th>
+                        <th>Security Name</th>
+                        <th>Industry Segment</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="custPortfolio in custPortfolios | unique: 'custPortfolios[$index].stocks.SecurityID'">
+                    <tr class="evenRow" ng-repeat="stock in custPortfolios[$index].stocks ">
+                        <td>{{stock['SecurityID']}}</td>
+                        <td>{{stock['SecurityName']}}</td>
+                        <td>{{stock['IndustrySegment']}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="viewCSVFileBox bottomMargin30">
+        <p class="viewCSVFileTitle">Customer’s Transactions Data</p>
+        <div class="scrollTable hideHorizontalScroll">
+            <table cellspacing="0" cellpadding="0" border="0" class="gridBlue" id="">
+
+                <thead>
+                    <tr class="gridHeaderBlue">
+                        <th>Cust ID</th>
+                        <th>Account Number</th>
+                        <th>Transaction Date</th>
+                        <th>Asset Type</th>
+                        <th>Security ID</th>
+                        <th>Trans. Type</th>
+                        <th>Quantity</th>
+                        <th>Price (INR)</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="custPortfolio in custPortfolios">
+                    <tr class="evenRow" ng-repeat="stock in custPortfolios[$index].stocks">
+                        <td>{{custPortfolio['CustomerID']}}</td>
+                        <td>{{custPortfolio['AccountNumber']}}</td>
+                        <td>{{stock.Transactions[0].DateOfTransaction}}</td>
+                        <td>{{stock['AssetType']}}</td>
+                        <td>{{stock['SecurityID']}}</td>
+                        <td>{{stock.Transactions[0].TransactionType}}</td>
+                        <td>{{stock.Transactions[0]['Quantity']}}</td>
+                        <td>{{stock.Transactions[0].CostPrice_PerStock_INR}}</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>

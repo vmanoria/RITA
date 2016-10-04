@@ -1,0 +1,84 @@
+<!-- Navigation Starts -->
+<nav>
+    <h1><a href="#/about"><img src="images/arrow.jpg" width="18" height="21" alt=""> RITA</a></h1>
+    <div class="menu">
+        <select ng-model="selectedCustomer" ng-change="displayRebalICRReport(selectedCustomer)">
+            <option ng-repeat="customer in customers" value="{{customer.CustomerID}}">
+                {{customer.CustomerName}}
+            </option>
+
+        </select>
+
+        <ul>
+            <li><a href="#/about">About Us</a></li>
+            <li><a href="#/customerPnLReport">Profit & Loss</a></li>
+            <li><a href="#/customerRebalancedICRReport" class="active">Re-balanced</a></li>
+			<li><a href="#/inputPI">Personality Analysis</a></li>
+            <li><a href="#/recommendedPortfolio">Recommended</a></li>
+			<li><a href="/fileUpload.html">Upload</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Content Starts -->
+<div class="wrapper" ng-if="custRebalICRReport==undefined">
+<center><h2>No data available. Select a different customer.</h2></center>
+</div>
+<div class="wrapper" ng-if="custRebalICRReport!=undefined">
+    <div class="chartmain">
+        <h2>Rebalanced ICR (Industry Concentration Report)</h2>
+        <div class="chartlft rebalanced-graph">
+
+
+            <div class="graph" ng-controller="CustomerRebalancedICRController">
+
+                <nvd3-multi-bar-chart data="rebalancedDataForChart" id="exampleId2" width="550" height="250" x="xMultiBarFunction()" y="yMultiBarFunction()" showXAxis="true" showYAxis="true" showLegend="true" <svg>
+                    </svg>
+                </nvd3-multi-bar-chart>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<br>
+
+
+<div class="clearfix"></div>
+<div class="padding"  ng-if="custRebalICRReport!=undefined">
+    <table cellpadding="0" cellspacing="0" border="1" width="70%" bordercolor="#757575" align="center">
+
+        <thead bgcolor="#90d5e6">
+            <tr>
+                <th class="alignLft">Industry Segment</th>
+                <th class="alignLft">Original Allocation</th>
+                <th class="alignLft">Current Allocation
+                    <br> (INR)</th>
+                <th class="alignLft">Rebalanced Current Allocation
+                    <br> (INR)</th>
+                <th>Incremental Investments</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="custrebicr in custRebalICRReport">
+                <td class="alignLft">{{custrebicr['_id'].IndustrySegment}}</td>
+                <td class="alignLft">{{custrebicr.TCP}}</td>
+                <td>{{custrebicr.TCMP}}</td>
+                <td>{{custrebicr.rebalancedAlloc}}</td>
+                <td>{{custrebicr.incrementalInvest}}</td>
+            </tr>
+
+            <thead bgcolor="#ddf2f7">
+                <tr>
+                    <th class="alignLft"><strong>Totals</strong></th>
+                    <th class="alignLft"><strong>{{getRebalTcpTotal()}}</strong></th>
+                    <th><strong>{{getRebalTcmpTotal()}}</strong></th>
+                    <th><strong>{{getRebalAllocationTotal()}}</strong></th>
+                    <th><strong>{{getIncrementalInvestmentTotal()}}</strong></th>
+                </tr>
+            </thead>
+        </tbody>
+
+    </table>
+
+</div>

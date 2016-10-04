@@ -1,0 +1,19 @@
+{
+  "name": "RitaApp",
+  "version": "1.0.0",
+  "description": "MVP1.0",
+  "main": "server.js",
+  "dependencies": {
+    "async": "^1.5.2",
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
+    "i18n": "^0.8.2",
+    "mongojs": "^0.18.1",
+    "regex": "^0.1.1",
+    "request": "^2.72.0",
+    "watson-developer-cloud": "^1.9.3",
+	"multer": "^1.1.0",
+    "underscore": "^1.8.3",
+	"dotenv": "2.0.0"
+  }
+}
